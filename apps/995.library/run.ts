@@ -117,11 +117,30 @@ const init = async () => {
     global.window = global as any
     ;(global as any).PIVOTS = (global as any).PIVOTS || {}
 
-    const idx = options.separator
+    const identity = getRootIdentity()
+    const existingPackages = getExistingPackages()
+
+    // Determine target separator: explicit CLI option or default domain target for this repository
+    const defaultTarget = existingPackages.find((p) => {
+        const repoDomain = identity.name
+            .replace(/^series-/, '')
+            .replace(/-/g, '')
+        return (
+            p.name.toLowerCase() === repoDomain.toLowerCase() ||
+            p.name.endsWith(`.${repoDomain.toLowerCase()}`) ||
+            p.name.split('.')[1]?.toLowerCase() === repoDomain.toLowerCase() ||
+            p.globalKey.toLowerCase() === repoDomain.toLowerCase()
+        )
+    })
+
+    const idx =
+        options.separator ||
+        (defaultTarget
+            ? defaultTarget.name.split('.')[1] || defaultTarget.name
+            : undefined)
     if (idx) console.log(`   Targeting: ${idx}`)
 
     const libPath = path.resolve(import.meta.dirname, './dist/995.library')
-    const existingPackages = getExistingPackages()
 
     try {
         const LIBRARY = require(path.join(libPath, 'hunt'))
@@ -138,7 +157,6 @@ const init = async () => {
             idx: idx,
         })
 
-        const identity = getRootIdentity()
         const CONSOLE_ACTION_LIBRARY = require(
             path.join(libPath, '83.console.unit/console.action'),
         )
