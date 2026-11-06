@@ -1,6 +1,9 @@
-export { initVoice } from './buz/vaultScaffold.buzz.js'
-export { scaffoldVault } from './buz/vaultScaffold.buzz.js'
-export { syncFloatingSymlinks } from './buz/symlinkSync.buzz.js'
-export { provisionSeriesPartition } from './buz/seriesPartition.buzz.js'
-export { assertLikenessQuarantine } from './buz/seriesPartition.buzz.js'
-export { validateSourceInode } from './buz/ingressValidate.buzz.js'
+export { initVoice } from './buz/vaultScaffold.buzz.js';
+export { scaffoldVault } from './buz/vaultScaffold.buzz.js';
+export { syncFloatingSymlinks } from './buz/symlinkSync.buzz.js';
+export { provisionSeriesPartition } from './buz/seriesPartition.buzz.js';
+export { assertLikenessQuarantine } from './buz/seriesPartition.buzz.js';
+export { validateSourceInode } from './buz/ingressValidate.buzz.js';
+export { matchExistingCharacter } from './buz/characterMatch.buzz.js';
+export { scaffoldNewCharacterProfile } from './buz/characterMatch.buzz.js';
+export { resolveMonotonicVersion } from './buz/versionResolver.buzz.js';
