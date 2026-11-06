@@ -219,6 +219,88 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                                         dat: { characterSlug: slug },
                                     },
                                 )
+
+                                const vocoderList = [
+                                    '[1] Chatterbox-Base-FP16 (Zero-Shot Clone)',
+                                    '[2] StyleTTS-2 (Adversarial Style Diffusion)',
+                                    '[3] CosyVoice-300M (Multi-Lingual High Fidelity)',
+                                    '[4] Parler-TTS (Natural Language Description Prompt)',
+                                    '[5] Kokoro (Lightweight Fast Local)',
+                                    '[6] Piper (Deterministic Offline CPU)',
+                                ]
+
+                                bit = await global.LIBRARY.hunt(UPDATE_GRID, {
+                                    x: 0,
+                                    y: 4,
+                                    xSpan: 4,
+                                    ySpan: 8,
+                                })
+                                const vocoderBit = await global.LIBRARY.hunt(
+                                    OPEN_CHOICE,
+                                    {
+                                        dat: {
+                                            clr0: Color.BLACK,
+                                            clr1: Color.YELLOW,
+                                        },
+                                        src: Align.VERTICAL,
+                                        lst: vocoderList,
+                                        net: bit.grdBit.dat,
+                                    },
+                                )
+                                const vocoderSrc = vocoderBit?.chcBit?.src
+                                let selectedEngine: any = null
+                                if (vocoderSrc) {
+                                    for (const eng of [
+                                        'Chatterbox-Base-FP16',
+                                        'StyleTTS-2',
+                                        'CosyVoice-300M',
+                                        'Parler-TTS',
+                                        'Kokoro',
+                                        'Piper',
+                                    ]) {
+                                        if (vocoderSrc.includes(eng)) {
+                                            selectedEngine = eng
+                                            break
+                                        }
+                                    }
+                                }
+
+                                if (selectedEngine) {
+                                    try {
+                                        const cfgRes: any = await ste.hunt(
+                                            ActVoi.CONFIGURE_VOICE_RECIPE,
+                                            {
+                                                dat: {
+                                                    characterSlug: slug,
+                                                    ttsEngine: selectedEngine,
+                                                    conditioningStrategy:
+                                                        'ZERO_SHOT_CLONE',
+                                                    baseDspModifiers: {
+                                                        pitchShiftSemitones:
+                                                            -3.5,
+                                                        formantWarpingFactor:
+                                                            1.15,
+                                                        speedScalar: 0.95,
+                                                        breathinessMultiplier:
+                                                            1.25,
+                                                        vocalFryDensity: 0.4,
+                                                    },
+                                                },
+                                            },
+                                        )
+                                        const recipe = cfgRes?.voiBit?.dat
+                                        if (recipe) {
+                                            await ste.hunt(
+                                                ActVoi.COMMIT_RECIPE_TO_MANIFEST,
+                                                {
+                                                    dat: { recipe },
+                                                },
+                                            )
+                                        }
+                                    } catch (err: any) {
+                                        // Error telemetry emitted by configureVoiceRecipe
+                                    }
+                                }
                             }
                         } catch {}
                     }

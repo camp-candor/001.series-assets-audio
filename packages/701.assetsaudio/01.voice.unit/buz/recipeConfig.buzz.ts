@@ -105,7 +105,27 @@ export const configureVoiceRecipe = async (
     throw err;
   }
 
-  const dsp = validateDspModifiers(payload.baseDspModifiers);
+  let dsp: DspModifiers;
+  try {
+    dsp = validateDspModifiers(payload.baseDspModifiers);
+  } catch (err: any) {
+    if (ste?.hunt) {
+      await ste.hunt('[Console action] Update Console', {
+        idx: 'cns00',
+        src: `:: [RECIPE:FAIL] ${err.message}`,
+      }).catch(() => {});
+    }
+    if (bal?.slv) {
+      bal.slv({
+        voiBit: {
+          idx: 'configure-voice-recipe-fail',
+          val: -1,
+          src: characterSlug,
+        },
+      });
+    }
+    throw err;
+  }
 
   const recipe: VoiceRecipeConfig = {
     characterSlug,
