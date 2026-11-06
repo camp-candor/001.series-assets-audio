@@ -1,5 +1,6 @@
-export { initVoice } from './buz/vaultScaffold.buzz.js'
-export { scaffoldVault } from './buz/vaultScaffold.buzz.js'
-export { syncFloatingSymlinks } from './buz/symlinkSync.buzz.js'
-export { provisionSeriesPartition } from './buz/seriesPartition.buzz.js'
-export { assertLikenessQuarantine } from './buz/seriesPartition.buzz.js'
+export { initVoice } from './buz/vaultScaffold.buzz.js';
+export { scaffoldVault } from './buz/vaultScaffold.buzz.js';
+export { syncFloatingSymlinks } from './buz/symlinkSync.buzz.js';
+export { provisionSeriesPartition } from './buz/seriesPartition.buzz.js';
+export { assertLikenessQuarantine } from './buz/seriesPartition.buzz.js';
+export { validateSourceInode } from './buz/ingressValidate.buzz.js';
