@@ -321,11 +321,12 @@ describe('Character Resolution Monotonic Versioning Feature Tests', () => {
         await matchExistingCharacter(
             model,
             {
+                idx: 'match-existing-character',
                 src: testRoot,
                 slv: (res: any) => {
                     matchResult = res
                 },
-            },
+            } as any,
             ste,
         )
 
@@ -354,11 +355,12 @@ describe('Character Resolution Monotonic Versioning Feature Tests', () => {
         await resolveMonotonicVersion(
             model,
             {
+                idx: 'resolve-monotonic-version',
                 dat: { characterSlug: 'char_bog' },
                 slv: (res: any) => {
                     resolveResult = res
                 },
-            },
+            } as any,
             ste,
         )
 

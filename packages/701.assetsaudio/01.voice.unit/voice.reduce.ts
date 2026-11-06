@@ -60,6 +60,20 @@ export function reducer(
                 state,
             )
 
+        case Act.CONFIGURE_VOICE_RECIPE:
+            return Buzz.configureVoiceRecipe(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.COMMIT_RECIPE_TO_MANIFEST:
+            return Buzz.commitRecipeToManifest(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
         default:
             return model
     }

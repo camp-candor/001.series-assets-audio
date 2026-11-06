@@ -64,6 +64,18 @@ export class ResolveMonotonicVersion implements Action<VoiceBit> {
     constructor(public bale: VoiceBit) {}
 }
 
+export const CONFIGURE_VOICE_RECIPE = '[Voice action] Configure Voice Recipe'
+export class ConfigureVoiceRecipe implements Action<VoiceBit> {
+    readonly type = CONFIGURE_VOICE_RECIPE
+    constructor(public bale: VoiceBit) {}
+}
+
+export const COMMIT_RECIPE_TO_MANIFEST = '[Voice action] Commit Recipe To Manifest'
+export class CommitRecipeToManifest implements Action<VoiceBit> {
+    readonly type = COMMIT_RECIPE_TO_MANIFEST
+    constructor(public bale: VoiceBit) {}
+}
+
 export type Actions =
     | InitVoice
     | ScaffoldVault
@@ -74,3 +86,5 @@ export type Actions =
     | MatchExistingCharacter
     | ScaffoldNewCharacter
     | ResolveMonotonicVersion
+    | ConfigureVoiceRecipe
+    | CommitRecipeToManifest
