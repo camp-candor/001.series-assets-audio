@@ -110,6 +110,56 @@ export class AuditConditionVault implements Action<VoiceBit> {
     constructor(public bale: VoiceBit) {}
 }
 
+export const UPDATE_VOICE = '[Voice action] Update Voice'
+export class UpdateVoice implements Action<VoiceBit> {
+    readonly type = UPDATE_VOICE
+    constructor(public bale: VoiceBit) {}
+}
+
+export const VALIDATE_LEGAL_CLEARANCE_TOKEN =
+    '[Legal action] Validate Legal Clearance Token'
+export class ValidateLegalClearanceToken implements Action<VoiceBit> {
+    readonly type = VALIDATE_LEGAL_CLEARANCE_TOKEN
+    constructor(public bale: VoiceBit) {}
+}
+
+export const VALIDATE_VOICE_MANIFEST = '[Voice action] Validate Voice Manifest'
+export class ValidateVoiceManifest implements Action<VoiceBit> {
+    readonly type = VALIDATE_VOICE_MANIFEST
+    constructor(public bale: VoiceBit) {}
+}
+
+export const RESOLVE_CHARACTER_VOICE = '[Voice action] Resolve Character Voice'
+export class ResolveCharacterVoice implements Action<VoiceBit> {
+    readonly type = RESOLVE_CHARACTER_VOICE
+    constructor(public bale: VoiceBit) {}
+}
+
+export const VALIDATE_LEXICON = '[Voice action] Validate Lexicon'
+export class ValidateLexicon implements Action<VoiceBit> {
+    readonly type = VALIDATE_LEXICON
+    constructor(public bale: VoiceBit) {}
+}
+
+export const VERIFY_SYMLINK_INTEGRITY =
+    '[Voice action] Verify Symlink Integrity'
+export class VerifySymlinkIntegrity implements Action<VoiceBit> {
+    readonly type = VERIFY_SYMLINK_INTEGRITY
+    constructor(public bale: VoiceBit) {}
+}
+
+export const AUDIT_ORPHAN_TAKES = '[Voice action] Audit Orphan Takes'
+export class AuditOrphanTakes implements Action<VoiceBit> {
+    readonly type = AUDIT_ORPHAN_TAKES
+    constructor(public bale: VoiceBit) {}
+}
+
+export const REGISTER_VOICE_TAKE = '[Voice action] Register Voice Take'
+export class RegisterVoiceTake implements Action<VoiceBit> {
+    readonly type = REGISTER_VOICE_TAKE
+    constructor(public bale: VoiceBit) {}
+}
+
 export type Actions =
     | InitVoice
     | ScaffoldVault
@@ -127,3 +177,11 @@ export type Actions =
     | RegisterConditionVariant
     | RetargetConditionSymlink
     | AuditConditionVault
+    | UpdateVoice
+    | ValidateLegalClearanceToken
+    | ValidateVoiceManifest
+    | ResolveCharacterVoice
+    | ValidateLexicon
+    | VerifySymlinkIntegrity
+    | AuditOrphanTakes
+    | RegisterVoiceTake
