@@ -1,3 +1,3 @@
 export default class VoiceUnit {
-  constructor(state: any) {}
+    constructor(state: any) {}
 }

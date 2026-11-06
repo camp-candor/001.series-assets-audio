@@ -1,11 +1,13 @@
-import type AssetsAudio from './fce/assetsaudio.interface.js';
+import type AssetsAudio from './fce/assetsaudio.interface.js'
 
 export class AssetsAudioModel implements AssetsAudio {
-  idx = '00.assetsaudio';
-  vaultRoot = process.cwd();
-  lfsInitialized = false;
-  totalVaultBytes = 0;
-  trackedMediaFiles = 0;
+    idx = '00.assetsaudio'
+    vaultRoot = process.cwd()
+    lfsInitialized = false
+    totalVaultBytes = 0
+    trackedMediaFiles = 0
 }
 
-export default AssetsAudioModel;
+export { AssetsAudioModel as AssetsaudioModel };
+export { AssetsAudioModel as AssetsaudioModel }
+export default AssetsAudioModel

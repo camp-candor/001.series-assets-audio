@@ -1,4 +1,4 @@
-import { AssetsaudioModel } from '../assetsaudio.model.js'
+import { AssetsAudioModel, AssetsaudioModel } from '../assetsaudio.model.js'
 import AssetsaudioBit from '../fce/assetsaudio.bit.js'
 import State from '../../99.core/state.js'
 

@@ -14,3 +14,12 @@ AGENTS.md merge=ours
 .env merge=ours
 apps/worker/wrangler.jsonc merge=ours
 apps/worker/src/tools.custom.ts merge=ours
+
+# ==============================================================================
+# :: GIT LFS BINARY STORAGE RULES
+# ==============================================================================
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.flac filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+

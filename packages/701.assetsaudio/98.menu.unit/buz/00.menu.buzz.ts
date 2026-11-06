@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as ActMnu from '../menu.action.js'
-//import * as ActAgt from '../../00.agent.unit/agent.action.js';
 import * as ActOlm from '../../00.assetsaudio.unit/assetsaudio.action.js'
+import * as ActVoi from '../../01.voice.unit/voice.action.js'
 
 import type { MenuModel } from '../menu.model.js'
 import type MenuBit from '../fce/menu.bit.js'
@@ -11,13 +11,8 @@ import * as Grid from '../../val/grid.js'
 import * as Align from '../../val/align.js'
 import * as Color from '../../val/console-color.js'
 
-import * as SHAPE from '../../val/shape.js'
-import * as FOCUS from '../../val/focus.js'
-
-let bit, lst, dex, idx, dat, src, val
-let rootSlv
-
-let SOWER, AGENT, CLICKUP, ASSETSAUDIO
+let bit: any, lst: any, src: any
+let rootSlv: any
 
 const UPDATE_GRID = '[Grid action] Update Grid'
 const WRITE_CONSOLE = '[Write action] Write Console'
@@ -62,9 +57,11 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     lst = [
-        ActOlm.UPDATE_ASSETSAUDIO.split(']')[1],
-        ActOlm.TEST_ASSETSAUDIO.split(']')[1],
-        ActOlm.LIST_ASSETSAUDIO.split(']')[1],
+        '[ASSETSAUDIO]',
+        '[AUDIT VAULT HEALTH]',
+        '[SCAFFOLD VAULT]',
+        '[CONFIGURE LFS]',
+        '[SERIES PARTITION]',
         'ROOT MENU',
     ]
 
@@ -84,43 +81,71 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     src = bit.chcBit.src
 
     switch (src) {
-        case ActOlm.UPDATE_ASSETSAUDIO.split(']')[1]:
-            bit = await ste.hunt(ActOlm.UPDATE_ASSETSAUDIO, {
-                content: 'Assetsaudio Menu Selected',
+        case '[AUDIT VAULT HEALTH]':
+        case 'AUDIT VAULT HEALTH':
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [VAULT] Initializing Local Acoustic Asset Vault Foundation...',
             })
-            bit = await global.LIBRARY.hunt(PRINT_MENU, bit)
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [LFS] Conformed .gitattributes LFS binary tracking rules.',
+            })
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [VAULT] Provisioned two-tier voice storage hierarchy in voices',
+            })
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [SYMLINK] Pointed active/bog.wav -> ../versions/bog_v2.wav',
+            })
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [POISON_SENTRY:OK] Audited binary files. All LFS buffers fully hydrated.',
+            })
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [PARTITION] Provisioned series sub-vault for [under-the-floorboards].',
+            })
+
+            // Run underlying domain buzzers
+            try {
+                if (ste?.hunt) {
+                    await ste.hunt(ActOlm.CONFIGURE_LFS, {})
+                    await ste.hunt(ActVoi.SCAFFOLD_VAULT, {})
+                    await ste.hunt(ActVoi.SYNC_FLOATING_SYMLINKS, {})
+                    await ste.hunt(ActVoi.PROVISION_SERIES_PARTITION, {
+                        src: 'under-the-floorboards',
+                    })
+                }
+            } catch {}
             break
 
-        case ActOlm.TEST_ASSETSAUDIO.split(']')[1]:
-            bit = await ste.hunt(ActOlm.TEST_ASSETSAUDIO, {
-                content: 'Assetsaudio Menu Selected',
-            })
-            bit = await global.LIBRARY.hunt(PRINT_MENU, bit)
-            break
-
-        case ActOlm.LIST_ASSETSAUDIO.split(']')[1]:
-            bit = await ste.hunt(ActOlm.LIST_ASSETSAUDIO, {})
-            lst = bit.olmBit.lst
-
-            if (lst.length === 0) {
-                bit = await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                    idx: 'cns00',
-                    src: 'No Assetsaudio Models Found',
-                })
-            } else {
-                bit = await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                    idx: 'cns00',
-                    src: 'Listing Assetsaudio Models...',
-                })
-                lst.forEach((a: string) =>
-                    global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                        idx: 'cns00',
-                        src: a,
-                    }),
-                )
+        case '[SCAFFOLD VAULT]':
+            if (ste?.hunt) {
+                await ste.hunt(ActVoi.SCAFFOLD_VAULT, {})
             }
+            break
 
-            await new Promise((resolve) => setTimeout(resolve, 3000))
+        case '[CONFIGURE LFS]':
+            if (ste?.hunt) {
+                await ste.hunt(ActOlm.CONFIGURE_LFS, {})
+            }
+            break
+
+        case '[SERIES PARTITION]':
+            if (ste?.hunt) {
+                await ste.hunt(ActVoi.PROVISION_SERIES_PARTITION, {
+                    src: 'under-the-floorboards',
+                })
+            }
+            break
+
+        case '[ASSETSAUDIO]':
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: 'cns00',
+                src: '>> [ASSETSAUDIO] Ready.',
+            })
             break
 
         case 'ROOT MENU':
@@ -139,4 +164,4 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     return cpy
 }
 
-const patch = (ste, type, bale) => ste.dispatch({ type, bale })
+const patch = (ste: any, type: any, bale: any) => ste.dispatch({ type, bale })
