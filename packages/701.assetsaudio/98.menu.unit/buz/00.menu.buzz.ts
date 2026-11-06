@@ -174,6 +174,52 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                                 dat: probeData,
                                 src: validatedPath,
                             })
+
+                            const matchRes: any = await ste.hunt(
+                                ActVoi.MATCH_EXISTING_CHARACTER,
+                                {},
+                            )
+                            const profiles = matchRes?.voiBit?.dat || []
+                            const charList = profiles.map(
+                                (p: any, idx: number) =>
+                                    `[${idx + 1}] ${p.characterSlug} (${p.latestVersionTag})`,
+                            )
+                            charList.push('[+] REGISTER NEW CHARACTER')
+
+                            bit = await global.LIBRARY.hunt(UPDATE_GRID, {
+                                x: 0,
+                                y: 4,
+                                xSpan: 4,
+                                ySpan: 8,
+                            })
+                            const charBit = await global.LIBRARY.hunt(
+                                OPEN_CHOICE,
+                                {
+                                    dat: {
+                                        clr0: Color.BLACK,
+                                        clr1: Color.YELLOW,
+                                    },
+                                    src: Align.VERTICAL,
+                                    lst: charList,
+                                    net: bit.grdBit.dat,
+                                },
+                            )
+                            const charSrc = charBit?.chcBit?.src
+                            if (
+                                charSrc &&
+                                charSrc !== '[+] REGISTER NEW CHARACTER'
+                            ) {
+                                const m = charSrc.match(
+                                    /\[\d+\]\s+([a-z0-9_]+)\s+\(/i,
+                                )
+                                const slug = m ? m[1] : charSrc.trim()
+                                await ste.hunt(
+                                    ActVoi.RESOLVE_MONOTONIC_VERSION,
+                                    {
+                                        dat: { characterSlug: slug },
+                                    },
+                                )
+                            }
                         } catch {}
                     }
                 }
