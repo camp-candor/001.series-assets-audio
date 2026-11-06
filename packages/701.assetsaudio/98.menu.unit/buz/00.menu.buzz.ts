@@ -3,6 +3,7 @@ import * as ActMnu from '../menu.action.js'
 import * as ActOlm from '../../00.assetsaudio.unit/assetsaudio.action.js'
 import * as ActVoi from '../../01.voice.unit/voice.action.js'
 import * as ActFil from '../../11.filter.unit/filter.action.js'
+import * as ActRed from '../../14.redaction.unit/redaction.action.js'
 import * as ActDes from '../../16.deesser.unit/deesser.action.js'
 import * as ActCmp from '../../24.compliance.unit/compliance.action.js'
 import * as ActInp from '../../84.input.unit/input.action.js'
@@ -121,9 +122,9 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     lst = [
         '[INGEST REFERENCE VOICE]',
         '[CHECK SIGNAL COMPLIANCE]',
+        '[VERIFY ACOUSTIC CADENCE]',
         '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
-        '[SCAFFOLD VAULT]',
         'ROOT MENU',
     ]
 
@@ -485,6 +486,88 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                             })
                         } catch (err: any) {
                             // Signal non-compliant fail-closed handled gracefully
+                        }
+                    }
+                }
+            } catch {}
+            break
+
+        case '[VERIFY ACOUSTIC CADENCE]':
+        case 'VERIFY ACOUSTIC CADENCE':
+            try {
+                const candidateTakes = [
+                    '[1] voices/versions/char_silas_v1.wav',
+                    '[2] samples/rapid_staccato_take.wav',
+                    '[<] CANCEL',
+                ]
+
+                bit = await global.LIBRARY.hunt(UPDATE_GRID, {
+                    x: 0,
+                    y: 4,
+                    xSpan: 4,
+                    ySpan: 8,
+                })
+                const takeBit = await global.LIBRARY.hunt(OPEN_CHOICE, {
+                    dat: { clr0: Color.BLACK, clr1: Color.YELLOW },
+                    src: Align.VERTICAL,
+                    lst: candidateTakes,
+                    net: bit.grdBit.dat,
+                })
+                const takeSrc = takeBit?.chcBit?.src
+
+                if (takeSrc && !takeSrc.includes('CANCEL')) {
+                    const isStaccato =
+                        takeSrc.includes('rapid_staccato') ||
+                        takeSrc.includes('samples')
+                    const selectedPath = isStaccato
+                        ? 'samples/rapid_staccato_take.wav'
+                        : 'voices/versions/char_silas_v1.wav'
+
+                    const len = 48000
+                    const samples = new Float32Array(len)
+                    for (let i = 0; i < len; i++) {
+                        samples[i] =
+                            0.2 * Math.sin((2 * Math.PI * 220 * i) / 48000)
+                    }
+
+                    if (ste?.hunt) {
+                        await ste.hunt(ActRed.INIT_REDACTION, {})
+
+                        const mockMetrics = isStaccato
+                            ? {
+                                  consonantAttackVelocity: 28.0,
+                                  averageSyllableDurationMs: 78.0,
+                                  pauseToSpeechRatio: 0.1,
+                                  rhythmEnergyVariance: 0.22,
+                              }
+                            : {
+                                  consonantAttackVelocity: 14.5,
+                                  averageSyllableDurationMs: 140.0,
+                                  pauseToSpeechRatio: 0.35,
+                                  rhythmEnergyVariance: 0.15,
+                              }
+
+                        const mockConfidence = isStaccato ? 0.94 : 0.968
+
+                        await ste.hunt(ActRed.EXECUTE_ACOUSTIC_REDACTION, {
+                            src: selectedPath,
+                            dat: {
+                                samples,
+                                mockMetrics,
+                                mockConfidence,
+                            },
+                        })
+
+                        try {
+                            await ste.hunt(ActVoi.ASSERT_BANNED_CADENCE, {
+                                dat: {
+                                    characterSlug: 'char_silas',
+                                    bannedCadences: ['RAPID_STACCATO'],
+                                    metrics: mockMetrics,
+                                },
+                            })
+                        } catch (err: any) {
+                            // Violation alarm emitted by assertBannedCadenceExclusion
                         }
                     }
                 }

@@ -3,6 +3,7 @@ import Model from './99.core/interface/model.interface.js'
 import AssetsaudioUnit from './00.assetsaudio.unit/assetsaudio.unit.js'
 import VoiceUnit from './01.voice.unit/voice.unit.js'
 import FilterUnit from './11.filter.unit/filter.unit.js'
+import RedactionUnit from './14.redaction.unit/redaction.unit.js'
 import DeesserUnit from './16.deesser.unit/deesser.unit.js'
 import ComplianceUnit from './24.compliance.unit/compliance.unit.js'
 import InputUnit from './84.input.unit/input.unit.js'
@@ -16,6 +17,8 @@ import Voice from './01.voice.unit/fce/voice.interface.js'
 import { VoiceModel } from './01.voice.unit/voice.model.js'
 import Filter from './11.filter.unit/fce/filter.interface.js'
 import { FilterModel } from './11.filter.unit/filter.model.js'
+import Redaction from './14.redaction.unit/fce/redaction.interface.js'
+import { RedactionModel } from './14.redaction.unit/redaction.model.js'
 import Deesser from './16.deesser.unit/fce/deesser.interface.js'
 import { DeesserModel } from './16.deesser.unit/deesser.model.js'
 import Compliance from './24.compliance.unit/fce/compliance.interface.js'
@@ -33,6 +36,7 @@ export const list: Array<any> = [
     AssetsaudioUnit,
     VoiceUnit,
     FilterUnit,
+    RedactionUnit,
     DeesserUnit,
     ComplianceUnit,
     InputUnit,
@@ -44,6 +48,7 @@ export const list: Array<any> = [
 import * as reduceFromAssetsaudio from './00.assetsaudio.unit/assetsaudio.reduce.js'
 import * as reduceFromVoice from './01.voice.unit/voice.reduce.js'
 import * as reduceFromFilter from './11.filter.unit/filter.reduce.js'
+import * as reduceFromRedaction from './14.redaction.unit/redaction.reduce.js'
 import * as reduceFromDeesser from './16.deesser.unit/deesser.reduce.js'
 import * as reduceFromCompliance from './24.compliance.unit/compliance.reduce.js'
 import * as reduceFromInput from './84.input.unit/input.reduce.js'
@@ -55,6 +60,7 @@ export const reducer: any = {
     assetsaudio: reduceFromAssetsaudio.reducer,
     voice: reduceFromVoice.reducer,
     filter: reduceFromFilter.reducer,
+    redaction: reduceFromRedaction.reducer,
     deesser: reduceFromDeesser.reducer,
     compliance: reduceFromCompliance.reducer,
     input: reduceFromInput.reducer,
@@ -67,6 +73,7 @@ export default class UnitData implements Model {
     assetsaudio: Assetsaudio = new AssetsAudioModel()
     voice: Voice = new VoiceModel()
     filter: Filter = new FilterModel()
+    redaction: Redaction = new RedactionModel()
     deesser: Deesser = new DeesserModel()
     compliance: Compliance = new ComplianceModel()
     input: Input = new InputModel()

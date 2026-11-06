@@ -1,3 +1,3 @@
 export default class RedactionUnit {
-  constructor(state: any) {}
+    constructor(state: any) {}
 }
