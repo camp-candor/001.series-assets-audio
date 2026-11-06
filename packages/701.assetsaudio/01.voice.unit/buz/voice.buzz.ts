@@ -306,8 +306,22 @@ export const validateVoiceManifest = async (
     const result = await inspectVoiceManifest(vaultRoot, {
         requireAllCleared: dat.requireAllCleared === true,
     })
+    const manifest = await readJsonSafe(
+        path.join(vaultRoot, 'voices', 'voice_manifest.json'),
+    )
 
     for (const slug of result.charactersValidated) {
+        const entry = manifest?.voices?.[slug]
+        if (entry?.legal_clearance_token) {
+            await emitConsole(
+                ste,
+                `>> [LEGAL:PASS] Character [${slug}] clearance verified (${entry.legal_clearance_token})`,
+            )
+        }
+        await emitConsole(
+            ste,
+            `>> [VOICE:MANIFEST:OK] [${slug}] reference take and digest verified.`,
+        )
         await emitConsole(
             ste,
             `>> [MANIFEST:OK] [${slug}] clearance, digest and reference take verified.`,
@@ -321,6 +335,12 @@ export const validateVoiceManifest = async (
     }
     for (const breach of result.breaches) {
         await emitConsole(ste, `:: [MANIFEST:ERR] ${breach}`)
+    }
+    if (result.valid) {
+        await emitConsole(
+            ste,
+            `>> [VOICE:MANIFEST:OK] Voice manifest verified.`,
+        )
     }
     await emitConsole(
         ste,

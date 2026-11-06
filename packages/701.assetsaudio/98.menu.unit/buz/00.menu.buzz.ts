@@ -778,6 +778,20 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                     })
                 }
             } catch {}
+            try {
+                if (ste?.hunt)
+                    await ste.hunt(ActVoi.VALIDATE_VOICE_MANIFEST, {})
+            } catch {}
+            try {
+                if (ste?.hunt) await ste.hunt(ActVoi.VALIDATE_LEXICON, {})
+            } catch {}
+            try {
+                if (ste?.hunt)
+                    await ste.hunt(ActVoi.VERIFY_SYMLINK_INTEGRITY, {})
+            } catch {}
+            try {
+                if (ste?.hunt) await ste.hunt(ActVoi.AUDIT_ORPHAN_TAKES, {})
+            } catch {}
             // Feature 2.3 master audit gauntlet; live telemetry via console bridge
             try {
                 if (ste?.hunt) {
