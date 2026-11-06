@@ -21,6 +21,43 @@ const OPEN_CHOICE = '[Open action] Open Choice'
 const CLOSE_TERMINAL = '[Close action] Close Terminal'
 const PRINT_MENU = '[Render action] Print Menu'
 
+const HUD_CONSOLE = 'cns01'
+const QUOTA_CEILING_BYTES = 4294967296
+
+export const bridgeConsole = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
+    try {
+        if (bal?.src != null && global.LIBRARY?.hunt) {
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: bal.idx || 'cns00',
+                src: bal.src,
+            })
+        }
+    } catch {}
+    if (bal?.slv != null) {
+        try {
+            bal.slv({ mnuBit: { idx: 'bridge-console' } })
+        } catch {}
+    }
+    return cpy
+}
+
+const renderHud = async (hud: { health: string; bytes: number; pct: string }) => {
+    try {
+        const lines = [
+            'VAULT STATUS',
+            `Health: [${hud.health}]`,
+            `Bytes: ${hud.bytes} / ${QUOTA_CEILING_BYTES}`,
+            `Used: ${hud.pct}% of 4 GB`,
+        ]
+        for (const line of lines) {
+            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                idx: HUD_CONSOLE,
+                src: line,
+            })
+        }
+    } catch {}
+}
+
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     if (bal.slv != null) rootSlv = bal.slv
 
@@ -50,6 +87,19 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
         src: '-----------',
     })
 
+    bit = await global.LIBRARY.hunt(UPDATE_GRID, {
+        x: 0,
+        y: 0,
+        xSpan: 4,
+        ySpan: 4,
+    })
+    bit = await global.LIBRARY.hunt(WRITE_CONSOLE, {
+        idx: HUD_CONSOLE,
+        src: '',
+        dat: { net: bit.grdBit.dat, src: 'alligator0' },
+    })
+    await renderHud({ health: 'UNINITIALIZED', bytes: 0, pct: '0.00' })
+
     await updateMenu(cpy, bal, ste)
 
     return cpy
@@ -57,7 +107,7 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     lst = [
-        '[ASSETSAUDIO]',
+        '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
         '[SCAFFOLD VAULT]',
         '[CONFIGURE LFS]',
@@ -83,42 +133,88 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     switch (src) {
         case '[AUDIT VAULT HEALTH]':
         case 'AUDIT VAULT HEALTH':
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [VAULT] Initializing Local Acoustic Asset Vault Foundation...',
-            })
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [LFS] Conformed .gitattributes LFS binary tracking rules.',
-            })
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [VAULT] Provisioned two-tier voice storage hierarchy in voices',
-            })
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [SYMLINK] Pointed active/bog.wav -> ../versions/bog_v2.wav',
-            })
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [POISON_SENTRY:OK] Audited binary files. All LFS buffers fully hydrated.',
-            })
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [PARTITION] Provisioned series sub-vault for [under-the-floorboards].',
-            })
-
-            // Run underlying domain buzzers
+            // Phase-1 foundation passes; live telemetry streams via console bridge
+            try {
+                if (ste?.hunt) await ste.hunt(ActOlm.CONFIGURE_LFS, {})
+            } catch {}
+            try {
+                if (ste?.hunt) await ste.hunt(ActVoi.SCAFFOLD_VAULT, {})
+            } catch {}
+            try {
+                if (ste?.hunt) await ste.hunt(ActVoi.SYNC_FLOATING_SYMLINKS, {})
+            } catch {}
             try {
                 if (ste?.hunt) {
-                    await ste.hunt(ActOlm.CONFIGURE_LFS, {})
-                    await ste.hunt(ActVoi.SCAFFOLD_VAULT, {})
-                    await ste.hunt(ActVoi.SYNC_FLOATING_SYMLINKS, {})
                     await ste.hunt(ActVoi.PROVISION_SERIES_PARTITION, {
                         src: 'under-the-floorboards',
                     })
                 }
             } catch {}
+            // Feature 2.3 master audit gauntlet; live telemetry via console bridge
+            try {
+                if (ste?.hunt) {
+                    const res: any = await ste.hunt(
+                        ActOlm.EXECUTE_MASTER_AUDIT,
+                        {},
+                    )
+                    const rep = res?.asbBit?.dat
+                    if (rep) {
+                        await renderHud({
+                            health: rep.overallStatus || 'DEGRADED',
+                            bytes:
+                                rep.storageQuotaAudit?.totalVaultBytes ?? 0,
+                            pct: String(
+                                rep.storageQuotaAudit?.percentageUsed ??
+                                    '0.00',
+                            ),
+                        })
+                    }
+                }
+            } catch {}
+            break
+
+        case '[SWEEP STORAGE QUOTAS]':
+        case 'SWEEP STORAGE QUOTAS':
+            try {
+                if (ste?.hunt) {
+                    const res: any = await ste.hunt(
+                        ActOlm.SWEEP_STORAGE_QUOTAS,
+                        {},
+                    )
+                    const rep = res?.asbBit?.dat
+                    if (rep?.subdirectories) {
+                        for (const sub of ['voices', 'foley', 'music']) {
+                            const s = rep.subdirectories[sub] || {
+                                bytes: 0,
+                                files: 0,
+                            }
+                            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                                idx: 'cns00',
+                                src: `>> [SWEEPER] ${sub}: ${s.bytes} bytes across ${s.files} files.`,
+                            })
+                        }
+                    }
+                    if (rep) {
+                        const health =
+                            rep.status === 'EXCEEDED'
+                                ? 'QUOTA_EXCEEDED'
+                                : rep.status === 'APPROACHING_CEILING'
+                                  ? 'DEGRADED'
+                                  : 'HEALTHY'
+                        await renderHud({
+                            health,
+                            bytes: rep.totalVaultBytes ?? 0,
+                            pct: String(rep.percentageUsed ?? '0.00'),
+                        })
+                    }
+                }
+            } catch {
+                await renderHud({
+                    health: 'QUOTA_EXCEEDED',
+                    bytes: QUOTA_CEILING_BYTES,
+                    pct: '100.00',
+                })
+            }
             break
 
         case '[SCAFFOLD VAULT]':
@@ -141,20 +237,15 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
             }
             break
 
-        case '[ASSETSAUDIO]':
-            await global.LIBRARY.hunt(UPDATE_CONSOLE, {
-                idx: 'cns00',
-                src: '>> [ASSETSAUDIO] Ready.',
-            })
-            break
-
         case 'ROOT MENU':
             if (rootSlv != null) rootSlv({ mnuBit: { idx: 'root-menu' } })
             return cpy
 
         default:
-            bit = await ste.hunt(CLOSE_TERMINAL, {})
-            break
+            try {
+                await global.LIBRARY.hunt(CLOSE_TERMINAL, {})
+            } catch {}
+            process.exit(0)
     }
 
     setTimeout(async () => {

@@ -7,7 +7,7 @@ import MenuUnit from './98.menu.unit/menu.unit.js'
 import BusUnit from './99.bus.unit/bus.unit.js'
 
 import Assetsaudio from './00.assetsaudio.unit/fce/assetsaudio.interface.js'
-import { AssetsaudioModel } from './00.assetsaudio.unit/assetsaudio.model.js'
+import { AssetsAudioModel } from './00.assetsaudio.unit/assetsaudio.model.js'
 import Voice from './01.voice.unit/fce/voice.interface.js'
 import { VoiceModel } from './01.voice.unit/voice.model.js'
 import Collect from './97.collect.unit/fce/collect.interface.js'
@@ -40,7 +40,7 @@ export const reducer: any = {
 }
 
 export default class UnitData implements Model {
-    assetsaudio: Assetsaudio = new AssetsaudioModel()
+    assetsaudio: Assetsaudio = new AssetsAudioModel()
     voice: Voice = new VoiceModel()
     collect: Collect = new CollectModel()
     menu: Menu = new MenuModel()

@@ -16,6 +16,9 @@ export function reducer(
         case Act.INIT_MENU:
             return Buzz.initMenu(clone(model), act.bale, state)
 
+        case Act.UPDATE_CONSOLE:
+            return Buzz.bridgeConsole(clone(model), act.bale, state)
+
         default:
             return model
     }

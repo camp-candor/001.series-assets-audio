@@ -157,6 +157,12 @@ export class GraphicsmagicMenu implements Action {
     constructor(public bale: MenuBit) {}
 }
 
+export const UPDATE_CONSOLE = '[Console action] Update Console'
+export class UpdateConsole implements Action {
+    readonly type = UPDATE_CONSOLE
+    constructor(public bale: MenuBit) {}
+}
+
 export type Actions =
     | InitMenu
     | ClickupMenu
@@ -184,3 +190,4 @@ export type Actions =
     | DataMenu
     | AgentMenu
     | GraphicsmagicMenu
+    | UpdateConsole
