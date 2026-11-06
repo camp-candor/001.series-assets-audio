@@ -1,3 +1,3 @@
 export default class ComplianceUnit {
-    constructor(state: any) {}
+  constructor(state: any) {}
 }
