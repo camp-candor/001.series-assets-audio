@@ -12,6 +12,9 @@ import type { MenuModel } from '../menu.model.js'
 import type MenuBit from '../fce/menu.bit.js'
 import type State from '../../99.core/state.js'
 
+import fs from 'fs-extra'
+import path from 'path'
+
 import * as Grid from '../../val/grid.js'
 import * as Align from '../../val/align.js'
 import * as Color from '../../val/console-color.js'
@@ -118,6 +121,187 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     return cpy
 }
 
+const CONDITION_BACK = '[<] BACK'
+const CONDITION_CANCEL = '[<] CANCEL'
+
+const resolveVaultRoot = (ste: State): string => {
+    const configured = ste?.value?.voice?.voicesRoot
+    const seen: string[] = []
+    const push = (p: string) => {
+        if (p && !seen.includes(p)) seen.push(p)
+    }
+    if (typeof configured === 'string' && configured) {
+        push(path.resolve(configured))
+    }
+    let dir = path.resolve(process.cwd())
+    while (true) {
+        push(dir)
+        const parent = path.dirname(dir)
+        if (parent === dir) break
+        dir = parent
+    }
+    for (const cand of seen) {
+        try {
+            if (
+                fs.existsSync(path.join(cand, 'voices', 'voice_manifest.json'))
+            ) {
+                try {
+                    if (ste?.value?.voice) {
+                        ste.value.voice.voicesRoot = cand
+                    }
+                } catch {}
+                return cand
+            }
+        } catch {}
+    }
+    return typeof configured === 'string' && configured
+        ? configured
+        : process.cwd()
+}
+
+const openLeftChoice = async (choices: string[]) => {
+    const gridBit = await global.LIBRARY.hunt(UPDATE_GRID, {
+        x: 0,
+        y: 4,
+        xSpan: 4,
+        ySpan: 8,
+    })
+    return global.LIBRARY.hunt(OPEN_CHOICE, {
+        dat: { clr0: Color.BLACK, clr1: Color.YELLOW },
+        src: Align.VERTICAL,
+        lst: choices,
+        net: gridBit.grdBit.dat,
+    })
+}
+
+const writeVaultLine = async (line: string) => {
+    await global.LIBRARY.hunt(UPDATE_CONSOLE, { idx: 'cns00', src: line })
+}
+
+const manageConditionVault = async (ste: State) => {
+    const vaultRoot = resolveVaultRoot(ste)
+    const manifestPath = path.join(vaultRoot, 'voices', 'voice_manifest.json')
+    const readManifest = () => {
+        try {
+            return fs.existsSync(manifestPath)
+                ? fs.readJsonSync(manifestPath)
+                : null
+        } catch {
+            return null
+        }
+    }
+    let manifest = readManifest()
+    const slugs = Object.keys(manifest?.voices || {}).sort()
+    if (slugs.length === 0) {
+        await writeVaultLine(
+            ':: [VAULT:ERR] No registered characters in voice_manifest.json.',
+        )
+        return
+    }
+    const charList = slugs.map((s, i) => `[${i + 1}] ${s}`)
+    charList.push(CONDITION_CANCEL)
+    const charBit = await openLeftChoice(charList)
+    const charSrc = charBit?.chcBit?.src
+    if (!charSrc || charSrc.includes('CANCEL')) return
+    const charMatch = String(charSrc).match(/\[\d+\]\s+([A-Za-z0-9_]+)/)
+    const slug = (charMatch ? charMatch[1] : String(charSrc).trim())
+        .trim()
+        .toLowerCase()
+    if (!manifest?.voices?.[slug]) {
+        await writeVaultLine(
+            `:: [VAULT:ERR] Character [${slug}] not in manifest.`,
+        )
+        return
+    }
+
+    let stay = true
+    while (stay) {
+        manifest = readManifest() || manifest
+        const entry = manifest?.voices?.[slug] || {}
+        const variants = entry.condition_variants || {}
+        const tags = Object.keys(variants).sort()
+        await writeVaultLine(
+            `>> [VAULT] Character [${slug}] Condition Profile:`,
+        )
+        await writeVaultLine(
+            `   [0] ${'neutral'.padEnd(17)} -> versions/${slug}_${entry.active_version || 'v1'}.wav (active)`,
+        )
+        for (let i = 0; i < tags.length; i++) {
+            const tag = tags[i]
+            const ver = variants[tag]?.active_version || 'v1'
+            await writeVaultLine(
+                `   [${i + 1}] ${String(tag).padEnd(17)} -> versions/${slug}_${tag}_${ver}.wav (active)`,
+            )
+        }
+        await writeVaultLine('   [+] REGISTER NEW CONDITION VARIANT')
+        await writeVaultLine('   [!] RUN CONDITION VAULT AUDIT')
+
+        const subBit = await openLeftChoice([
+            '[+] REGISTER NEW CONDITION VARIANT',
+            '[!] RUN CONDITION VAULT AUDIT',
+            CONDITION_BACK,
+        ])
+        const subSrc = String(subBit?.chcBit?.src || '')
+        if (subSrc.includes('REGISTER NEW CONDITION')) {
+            const tagRes: any = await ste.hunt(ActInp.PROMPT_SOURCE_PATH, {
+                txt: 'Enter new condition tag (lowercase, underscores):',
+                dat: { defaultText: '' },
+            })
+            const tagVal = String(
+                tagRes?.putBit?.src || tagRes?.putBit?.dat?.value || '',
+            ).trim()
+            if (!tagVal || !tagRes?.putBit?.dat?.submitted) continue
+            const trigRes: any = await ste.hunt(ActInp.PROMPT_SOURCE_PATH, {
+                txt: `Enter somatic trigger for [${tagVal}]:`,
+                dat: { defaultText: '' },
+            })
+            const trigVal =
+                String(
+                    trigRes?.putBit?.src || trigRes?.putBit?.dat?.value || '',
+                ).trim() || 'unspecified_trigger'
+            try {
+                const regRes: any = await ste.hunt(
+                    ActVoi.REGISTER_CONDITION_VARIANT,
+                    {
+                        dat: {
+                            characterSlug: slug,
+                            conditionTag: tagVal,
+                            somaticTrigger: trigVal,
+                        },
+                    },
+                )
+                if (regRes?.voiBit?.val === 0) {
+                    await ste.hunt(ActVoi.RETARGET_CONDITION_SYMLINK, {
+                        dat: {
+                            characterSlug: slug,
+                            conditionTag: tagVal,
+                            versionNumber: 1,
+                        },
+                    })
+                } else {
+                    await writeVaultLine(
+                        `:: [VAULT:ERR] Condition [${tagVal}] rejected for [${slug}].`,
+                    )
+                }
+            } catch (err: any) {
+                await writeVaultLine(
+                    `:: [VAULT:ERR] Condition registration failed: ${err?.message || err}`,
+                )
+            }
+        } else if (subSrc.includes('RUN CONDITION VAULT AUDIT')) {
+            try {
+                await ste.hunt(ActVoi.AUDIT_CONDITION_VAULT, { src: slug })
+            } catch (err: any) {
+                await writeVaultLine(
+                    `:: [VAULT:ERR] Condition vault audit failed: ${err?.message || err}`,
+                )
+            }
+        } else {
+            stay = false
+        }
+    }
+}
+
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     lst = [
         '[INGEST REFERENCE VOICE]',
@@ -125,6 +309,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
         '[VERIFY ACOUSTIC CADENCE]',
         '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
+        '[MANAGE CONDITION VAULT]',
         'ROOT MENU',
     ]
 
@@ -676,6 +861,13 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                     src: 'under-the-floorboards',
                 })
             }
+            break
+
+        case '[MANAGE CONDITION VAULT]':
+        case 'MANAGE CONDITION VAULT':
+            try {
+                await manageConditionVault(ste)
+            } catch {}
             break
 
         case 'ROOT MENU':
