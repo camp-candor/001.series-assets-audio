@@ -24,5 +24,12 @@ export class ClassifySignalGeometry implements Action<ComplianceBit> {
     constructor(public bale: ComplianceBit) {}
 }
 
+
+export const NORMALIZE_LOUDNESS = '[Compliance action] Normalize Loudness'
+export class NormalizeLoudness implements Action<ComplianceBit> {
+    readonly type = NORMALIZE_LOUDNESS
+    constructor(public bale: ComplianceBit) {}
+}
+
 export type Actions =
-    InitCompliance | ProbeAudioContainer | ClassifySignalGeometry
+    InitCompliance | ProbeAudioContainer | ClassifySignalGeometry | NormalizeLoudness
