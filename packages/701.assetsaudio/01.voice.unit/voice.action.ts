@@ -90,6 +90,26 @@ export class AssertBannedCadence implements Action<VoiceBit> {
     constructor(public bale: VoiceBit) {}
 }
 
+export const REGISTER_CONDITION_VARIANT =
+    '[Condition action] Register Condition Variant'
+export class RegisterConditionVariant implements Action<VoiceBit> {
+    readonly type = REGISTER_CONDITION_VARIANT
+    constructor(public bale: VoiceBit) {}
+}
+
+export const RETARGET_CONDITION_SYMLINK =
+    '[Condition action] Retarget Condition Symlink'
+export class RetargetConditionSymlink implements Action<VoiceBit> {
+    readonly type = RETARGET_CONDITION_SYMLINK
+    constructor(public bale: VoiceBit) {}
+}
+
+export const AUDIT_CONDITION_VAULT = '[Condition action] Audit Condition Vault'
+export class AuditConditionVault implements Action<VoiceBit> {
+    readonly type = AUDIT_CONDITION_VAULT
+    constructor(public bale: VoiceBit) {}
+}
+
 export type Actions =
     | InitVoice
     | ScaffoldVault
@@ -104,3 +124,6 @@ export type Actions =
     | CommitRecipeToManifest
     | ExecuteTwoTierPromotion
     | AssertBannedCadence
+    | RegisterConditionVariant
+    | RetargetConditionSymlink
+    | AuditConditionVault
