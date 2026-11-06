@@ -20,3 +20,10 @@ export {
     assertBannedCadenceExclusion,
     evaluateBannedCadences,
 } from './buz/bannedCadenceGuard.buzz.js'
+export {
+    registerConditionVariant,
+    resolveConditionTakes,
+    retargetConditionSymlink,
+    auditConditionVault,
+    normalizeConditionTag,
+} from './buz/conditionVault.buzz.js'

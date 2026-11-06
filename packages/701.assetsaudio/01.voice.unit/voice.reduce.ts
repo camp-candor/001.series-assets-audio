@@ -88,6 +88,23 @@ export function reducer(
                 state,
             )
 
+        case Act.REGISTER_CONDITION_VARIANT:
+            return Buzz.registerConditionVariant(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.RETARGET_CONDITION_SYMLINK:
+            return Buzz.retargetConditionSymlink(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.AUDIT_CONDITION_VAULT:
+            return Buzz.auditConditionVault(clone(model, true), act.bale, state)
+
         default:
             return model
     }
