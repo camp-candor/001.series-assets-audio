@@ -1,7 +1,9 @@
-import AssetsaudioBit from './assetsaudio.bit.js'
+import type AssetsAudioBit from './assetsaudio.bit.js';
 
-export default interface Assetsaudio {
-    // idx:string;
-    // assetsaudioBitList: AssetsaudioBit[];
-    // assetsaudioBits: any;
+export default interface AssetsAudio {
+  idx: string;
+  vaultRoot: string;
+  lfsInitialized: boolean;
+  totalVaultBytes: number;
+  trackedMediaFiles: number;
 }

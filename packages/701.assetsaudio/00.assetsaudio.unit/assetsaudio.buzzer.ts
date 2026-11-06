@@ -1,4 +1,3 @@
-export { initAssetsaudio } from './buz/assetsaudio.buzz.js'
-export { updateAssetsaudio } from './buz/assetsaudio.buzz.js'
-export { testAssetsaudio } from './buz/assetsaudio.buzz.js'
-export { listAssetsaudio } from './buz/assetsaudio.buzz.js'
+export { initAssetsAudio } from './buz/lfsConfig.buzz.js';
+export { configureLfs } from './buz/lfsConfig.buzz.js';
+export { auditPoisonBuffers } from './buz/poisonSentinel.buzz.js';
