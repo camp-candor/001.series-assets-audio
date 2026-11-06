@@ -2,6 +2,7 @@
 import * as ActMnu from '../menu.action.js'
 import * as ActOlm from '../../00.assetsaudio.unit/assetsaudio.action.js'
 import * as ActVoi from '../../01.voice.unit/voice.action.js'
+import * as ActInp from '../../84.input.unit/input.action.js'
 
 import type { MenuModel } from '../menu.model.js'
 import type MenuBit from '../fce/menu.bit.js'
@@ -24,7 +25,11 @@ const PRINT_MENU = '[Render action] Print Menu'
 const HUD_CONSOLE = 'cns01'
 const QUOTA_CEILING_BYTES = 4294967296
 
-export const bridgeConsole = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
+export const bridgeConsole = async (
+    cpy: MenuModel,
+    bal: MenuBit,
+    ste: State,
+) => {
     try {
         if (bal?.src != null && global.LIBRARY?.hunt) {
             await global.LIBRARY.hunt(UPDATE_CONSOLE, {
@@ -41,7 +46,11 @@ export const bridgeConsole = async (cpy: MenuModel, bal: MenuBit, ste: State) =>
     return cpy
 }
 
-const renderHud = async (hud: { health: string; bytes: number; pct: string }) => {
+const renderHud = async (hud: {
+    health: string
+    bytes: number
+    pct: string
+}) => {
     try {
         const lines = [
             'VAULT STATUS',
@@ -107,11 +116,11 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     lst = [
+        '[INGEST REFERENCE VOICE]',
         '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
         '[SCAFFOLD VAULT]',
         '[CONFIGURE LFS]',
-        '[SERIES PARTITION]',
         'ROOT MENU',
     ]
 
@@ -131,6 +140,26 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     src = bit.chcBit.src
 
     switch (src) {
+        case '[INGEST REFERENCE VOICE]':
+        case 'INGEST REFERENCE VOICE':
+            try {
+                if (ste?.hunt) {
+                    const promptRes: any = await ste.hunt(
+                        ActInp.PROMPT_SOURCE_PATH,
+                        {},
+                    )
+                    const enteredPath =
+                        promptRes?.putBit?.src || promptRes?.putBit?.dat?.value
+                    if (enteredPath && promptRes?.putBit?.dat?.submitted) {
+                        try {
+                            await ste.hunt(ActVoi.VALIDATE_SOURCE_INODE, {
+                                src: enteredPath,
+                            })
+                        } catch {}
+                    }
+                }
+            } catch {}
+            break
         case '[AUDIT VAULT HEALTH]':
         case 'AUDIT VAULT HEALTH':
             // Phase-1 foundation passes; live telemetry streams via console bridge
@@ -161,11 +190,9 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                     if (rep) {
                         await renderHud({
                             health: rep.overallStatus || 'DEGRADED',
-                            bytes:
-                                rep.storageQuotaAudit?.totalVaultBytes ?? 0,
+                            bytes: rep.storageQuotaAudit?.totalVaultBytes ?? 0,
                             pct: String(
-                                rep.storageQuotaAudit?.percentageUsed ??
-                                    '0.00',
+                                rep.storageQuotaAudit?.percentageUsed ?? '0.00',
                             ),
                         })
                     }

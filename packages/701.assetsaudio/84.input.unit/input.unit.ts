@@ -1,3 +1,3 @@
 export default class InputUnit {
-  constructor(state: any) {}
+    constructor(state: any) {}
 }
