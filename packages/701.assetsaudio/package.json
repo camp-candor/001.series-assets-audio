@@ -25,5 +25,11 @@
     },
     "scripts": {
         "test": "vitest run"
+    },
+    "devDependencies": {
+        "vitest": "3.2.4"
+    },
+    "dependencies": {
+        "fs-extra": "11.4.1"
     }
 }
