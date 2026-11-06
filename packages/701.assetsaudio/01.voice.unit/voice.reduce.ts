@@ -105,6 +105,46 @@ export function reducer(
         case Act.AUDIT_CONDITION_VAULT:
             return Buzz.auditConditionVault(clone(model, true), act.bale, state)
 
+        case Act.UPDATE_VOICE:
+            return Buzz.updateVoice(clone(model, true), act.bale, state)
+
+        case Act.VALIDATE_LEGAL_CLEARANCE_TOKEN:
+            return Buzz.validateLegalClearanceToken(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.VALIDATE_VOICE_MANIFEST:
+            return Buzz.validateVoiceManifest(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.RESOLVE_CHARACTER_VOICE:
+            return Buzz.resolveCharacterVoice(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.VALIDATE_LEXICON:
+            return Buzz.validateLexicon(clone(model, true), act.bale, state)
+
+        case Act.VERIFY_SYMLINK_INTEGRITY:
+            return Buzz.verifySymlinkIntegrity(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
+        case Act.AUDIT_ORPHAN_TAKES:
+            return Buzz.auditOrphanTakes(clone(model, true), act.bale, state)
+
+        case Act.REGISTER_VOICE_TAKE:
+            return Buzz.registerVoiceTake(clone(model, true), act.bale, state)
+
         default:
             return model
     }

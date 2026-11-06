@@ -27,3 +27,13 @@ export {
     auditConditionVault,
     normalizeConditionTag,
 } from './buz/conditionVault.buzz.js'
+export { validateLegalClearanceToken } from './buz/legalTokenValidate.buzz.js'
+export {
+    updateVoice,
+    validateVoiceManifest,
+    resolveCharacterVoice,
+    validateLexicon,
+    verifySymlinkIntegrity,
+    auditOrphanTakes,
+    registerVoiceTake,
+} from './buz/voice.buzz.js'

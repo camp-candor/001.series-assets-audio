@@ -1,24 +1,156 @@
 {
     "voices": {
         "char_billie_fae": {
-            "display_name": "Billie-Fae",
+            "active_version": "v1",
             "base_state": "neutral",
-            "active_version": "v1"
+            "display_name": "Billie-Fae",
+            "roster_status": "pending_clearance"
         },
         "char_bog": {
-            "display_name": "Bog",
+            "active_version": "v2",
             "base_state": "neutral",
-            "active_version": "v2"
+            "display_name": "Bog",
+            "roster_status": "pending_clearance",
+            "version_history": ["voices/versions/char_bog_v1.wav"]
+        },
+        "char_fib": {
+            "active_version": "v1",
+            "base_state": "neutral",
+            "display_name": "Fib",
+            "roster_status": "pending_clearance"
+        },
+        "char_gaffer_sludge": {
+            "active_version": "v1",
+            "base_state": "neutral",
+            "display_name": "Gaffer Sludge",
+            "roster_status": "pending_clearance"
+        },
+        "char_johnny_walkman": {
+            "active_pointer": "voices/active/char_johnny_walkman.wav",
+            "active_version": "v1",
+            "base_state": "neutral",
+            "bit_depth": 24,
+            "channels": 1,
+            "conditions": {
+                "neutral": {
+                    "reference_wav_path": "voices/versions/char_johnny_walkman_v1.wav",
+                    "source": "base_reference"
+                },
+                "tense": {
+                    "dsp_overrides": {
+                        "energy": 1.15,
+                        "pitch_semitones": 1,
+                        "speed": 1.08
+                    },
+                    "reference_wav_path": "voices/versions/char_johnny_walkman_v1.wav",
+                    "source": "base_reference"
+                },
+                "weary": {
+                    "dsp_overrides": {
+                        "energy": 0.8,
+                        "pitch_semitones": -1,
+                        "speed": 0.9
+                    },
+                    "reference_wav_path": "voices/versions/char_johnny_walkman_v1.wav",
+                    "source": "base_reference"
+                },
+                "whispering": {
+                    "dsp_overrides": {
+                        "breathiness": 0.8,
+                        "energy": 0.35,
+                        "pitch_semitones": 0,
+                        "speed": 0.95
+                    },
+                    "reference_wav_path": "voices/versions/char_johnny_walkman_v1.wav",
+                    "source": "base_reference"
+                }
+            },
+            "consent_digest": "cc8f145775b9d607d1829b2b7a61a9499d7d6d3e2d6a1b2a817141f49bcfd184",
+            "consent_verified": true,
+            "display_name": "Johnny Walkman",
+            "embedding_path": "voices/embeddings/char_johnny_walkman_v1.pt",
+            "jurisdiction": "US-GA-WIREGRASS",
+            "legal_clearance_token": "CLR-WG26-0001",
+            "reference_wav_path": "voices/versions/char_johnny_walkman_v1.wav",
+            "sample_rate_hz": 48000,
+            "series_scope": "wiregrass_basin",
+            "sha256": "e51282d99a6f04db65b45f55e2911361351a7e8475bed69205e06ec85fc1c269",
+            "signed_at": "2026-11-06T00:00:00.000Z",
+            "talent_identifier": "TALENT-WG26-JW-001",
+            "timbre": "measured baritone, Wiregrass drawl"
         },
         "char_mum_grissel": {
-            "display_name": "Mum Grissel",
+            "active_version": "v2",
             "base_state": "neutral",
-            "active_version": "v2"
+            "display_name": "Mum Grissel",
+            "roster_status": "pending_clearance",
+            "version_history": ["voices/versions/char_mum_grissel_v1.wav"]
+        },
+        "char_orbie_mayhaw": {
+            "active_pointer": "voices/active/char_orbie_mayhaw.wav",
+            "active_version": "v1",
+            "base_state": "neutral",
+            "bit_depth": 24,
+            "channels": 1,
+            "conditions": {
+                "neutral": {
+                    "reference_wav_path": "voices/versions/char_orbie_mayhaw_v1.wav",
+                    "source": "base_reference"
+                },
+                "tense": {
+                    "dsp_overrides": {
+                        "energy": 1.15,
+                        "pitch_semitones": 1,
+                        "speed": 1.08
+                    },
+                    "reference_wav_path": "voices/versions/char_orbie_mayhaw_v1.wav",
+                    "source": "base_reference"
+                },
+                "weary": {
+                    "dsp_overrides": {
+                        "energy": 0.8,
+                        "pitch_semitones": -1,
+                        "speed": 0.9
+                    },
+                    "reference_wav_path": "voices/versions/char_orbie_mayhaw_v1.wav",
+                    "source": "base_reference"
+                },
+                "whispering": {
+                    "dsp_overrides": {
+                        "breathiness": 0.8,
+                        "energy": 0.35,
+                        "pitch_semitones": 0,
+                        "speed": 0.95
+                    },
+                    "reference_wav_path": "voices/versions/char_orbie_mayhaw_v1.wav",
+                    "source": "base_reference"
+                }
+            },
+            "consent_digest": "6bbf2f6a932dc93b3e93bb21965198019f34b671bfe9adec0d89fc47f69a2c6e",
+            "consent_verified": true,
+            "display_name": "Orbie Mayhaw",
+            "embedding_path": "voices/embeddings/char_orbie_mayhaw_v1.pt",
+            "jurisdiction": "US-GA-WIREGRASS",
+            "legal_clearance_token": "CLR-WG26-0002",
+            "reference_wav_path": "voices/versions/char_orbie_mayhaw_v1.wav",
+            "sample_rate_hz": 48000,
+            "series_scope": "wiregrass_basin",
+            "sha256": "214f877514501913056ca1d449ea47c17ca55612eac9b2a60ca71b4c3130745c",
+            "signed_at": "2026-11-06T00:00:00.000Z",
+            "talent_identifier": "TALENT-WG26-OM-002",
+            "timbre": "sharp, dry contralto"
         },
         "char_silas": {
-            "display_name": "Silas",
+            "active_version": "v1",
             "base_state": "neutral",
-            "active_version": "v1"
+            "display_name": "Silas",
+            "roster_status": "pending_clearance"
+        },
+        "char_wattle": {
+            "active_version": "v1",
+            "base_state": "neutral",
+            "display_name": "Wattle",
+            "roster_status": "pending_clearance"
         }
     }
 }

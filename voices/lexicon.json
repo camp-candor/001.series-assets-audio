@@ -1,0 +1,76 @@
+{
+    "schema_version": "1.0.0",
+    "series_scope": "wiregrass_basin",
+    "entries": {
+        "Mayhaw": {
+            "word": "Mayhaw",
+            "arpabet": "M EY1 HH AO2",
+            "ipa": "/meI.hO/",
+            "category": "REGIONAL_DIALECT",
+            "notes": "South Georgia hawthorn fruit; also surname of Orbie Mayhaw."
+        },
+        "Okefenokee": {
+            "word": "Okefenokee",
+            "arpabet": "OW2 K AH0 F AH0 N OW1 K IY0",
+            "ipa": "/oU.k@.f@.noU.ki/",
+            "category": "REGIONAL_DIALECT",
+            "notes": "Okefenokee Swamp, Wiregrass Basin landmark."
+        },
+        "astigmatism": {
+            "word": "astigmatism",
+            "arpabet": "AH0 S T IH1 G M AH0 T IH2 Z AH0 M",
+            "ipa": "/@.stIg.m@.tIz.@m/",
+            "category": "CLINICAL_OPTOMETRY"
+        },
+        "Phoropter": {
+            "word": "Phoropter",
+            "arpabet": "F AO1 R AA2 P T ER0",
+            "ipa": "/fOr.Ap.t@r/",
+            "category": "CLINICAL_OPTOMETRY"
+        },
+        "Wiregrass": {
+            "word": "Wiregrass",
+            "arpabet": "W AY1 ER0 G R AE2 S",
+            "ipa": "/waI@r.gr{s/",
+            "category": "REGIONAL_DIALECT"
+        },
+        "Walkman": {
+            "word": "Walkman",
+            "arpabet": "W AO1 K M AH0 N",
+            "ipa": "/wOk.m@n/",
+            "category": "PROPER_NOUN",
+            "notes": "Surname of Johnny Walkman."
+        },
+        "Orbie": {
+            "word": "Orbie",
+            "arpabet": "AO1 R B IY0",
+            "ipa": "/Or.bi/",
+            "category": "PROPER_NOUN"
+        },
+        "Parallax": {
+            "word": "Parallax",
+            "arpabet": "P EH1 R AH0 L AE2 K S",
+            "ipa": "/pEr.@.l{ks/",
+            "category": "PROPER_NOUN",
+            "notes": "Episode title: The Parallax Dinner."
+        },
+        "Grissel": {
+            "word": "Grissel",
+            "arpabet": "G R IH1 S AH0 L",
+            "ipa": "/grIs.@l/",
+            "category": "LORE_TERM"
+        },
+        "Wattle": {
+            "word": "Wattle",
+            "arpabet": "W AA1 T AH0 L",
+            "ipa": "/wAt.@l/",
+            "category": "LORE_TERM"
+        },
+        "Candor": {
+            "word": "Candor",
+            "arpabet": "K AE1 N D ER0",
+            "ipa": "/k{n.d@r/",
+            "category": "LORE_TERM"
+        }
+    }
+}
