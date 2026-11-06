@@ -245,4 +245,40 @@ describe('Autonomous Container Probing Classification Feature Tests', () => {
         expect(slvResult.cmpBit.val).toBe(4250)
         expect(model.lastProbeResult?.sampleRate).toBe(48000)
     })
+
+    it('fails closed when probe target file path is empty', async () => {
+        const model = new ComplianceModel()
+        let slvResult: any = null
+        const bit: any = {
+            idx: 'test-empty-probe',
+            src: '',
+            slv: (r: any) => {
+                slvResult = r
+            },
+        }
+
+        await expect(probeAudioContainer(model, bit)).rejects.toThrow(
+            'PROBE_TARGET_EMPTY',
+        )
+        expect(slvResult).toBeDefined()
+        expect(slvResult.cmpBit.val).toBe(-1)
+    })
+
+    it('fails closed when probe target file does not exist on disk', async () => {
+        const model = new ComplianceModel()
+        let slvResult: any = null
+        const bit: any = {
+            idx: 'test-not-found-probe',
+            src: 'non_existent_file_take99.wav',
+            slv: (r: any) => {
+                slvResult = r
+            },
+        }
+
+        await expect(probeAudioContainer(model, bit)).rejects.toThrow(
+            'PROBE_FILE_NOT_FOUND',
+        )
+        expect(slvResult).toBeDefined()
+        expect(slvResult.cmpBit.val).toBe(-1)
+    })
 })

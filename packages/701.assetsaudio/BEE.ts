@@ -2,6 +2,7 @@ import Model from './99.core/interface/model.interface.js'
 
 import AssetsaudioUnit from './00.assetsaudio.unit/assetsaudio.unit.js'
 import VoiceUnit from './01.voice.unit/voice.unit.js'
+import ComplianceUnit from './24.compliance.unit/compliance.unit.js'
 import InputUnit from './84.input.unit/input.unit.js'
 import CollectUnit from './97.collect.unit/collect.unit.js'
 import MenuUnit from './98.menu.unit/menu.unit.js'
@@ -11,6 +12,8 @@ import Assetsaudio from './00.assetsaudio.unit/fce/assetsaudio.interface.js'
 import { AssetsAudioModel } from './00.assetsaudio.unit/assetsaudio.model.js'
 import Voice from './01.voice.unit/fce/voice.interface.js'
 import { VoiceModel } from './01.voice.unit/voice.model.js'
+import Compliance from './24.compliance.unit/fce/compliance.interface.js'
+import { ComplianceModel } from './24.compliance.unit/compliance.model.js'
 import Input from './84.input.unit/fce/input.interface.js'
 import { InputModel } from './84.input.unit/input.model.js'
 import Collect from './97.collect.unit/fce/collect.interface.js'
@@ -23,6 +26,7 @@ import { BusModel } from './99.bus.unit/bus.model.js'
 export const list: Array<any> = [
     AssetsaudioUnit,
     VoiceUnit,
+    ComplianceUnit,
     InputUnit,
     CollectUnit,
     MenuUnit,
@@ -31,6 +35,7 @@ export const list: Array<any> = [
 
 import * as reduceFromAssetsaudio from './00.assetsaudio.unit/assetsaudio.reduce.js'
 import * as reduceFromVoice from './01.voice.unit/voice.reduce.js'
+import * as reduceFromCompliance from './24.compliance.unit/compliance.reduce.js'
 import * as reduceFromInput from './84.input.unit/input.reduce.js'
 import * as reduceFromCollect from './97.collect.unit/collect.reduce.js'
 import * as reduceFromMenu from './98.menu.unit/menu.reduce.js'
@@ -39,6 +44,7 @@ import * as reduceFromBus from './99.bus.unit/bus.reduce.js'
 export const reducer: any = {
     assetsaudio: reduceFromAssetsaudio.reducer,
     voice: reduceFromVoice.reducer,
+    compliance: reduceFromCompliance.reducer,
     input: reduceFromInput.reducer,
     collect: reduceFromCollect.reducer,
     menu: reduceFromMenu.reducer,
@@ -48,6 +54,7 @@ export const reducer: any = {
 export default class UnitData implements Model {
     assetsaudio: Assetsaudio = new AssetsAudioModel()
     voice: Voice = new VoiceModel()
+    compliance: Compliance = new ComplianceModel()
     input: Input = new InputModel()
     collect: Collect = new CollectModel()
     menu: Menu = new MenuModel()

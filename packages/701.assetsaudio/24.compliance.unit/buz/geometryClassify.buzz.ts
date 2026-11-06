@@ -117,6 +117,15 @@ export const classifySignalGeometry = async (
                 src: `>> [CLASSIFY] Signal geometry classified as [${category}] | Verdict: [${recommendation}] (${issues.length} issue(s)).`,
             })
             .catch(() => {})
+
+        for (const issue of issues) {
+            await ste
+                .hunt('[Console action] Update Console', {
+                    idx: 'cns00',
+                    src: `:: [COMPLIANCE:WARN] ${issue}`,
+                })
+                .catch(() => {})
+        }
     }
 
     if (bal?.slv) {

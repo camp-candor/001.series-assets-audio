@@ -2,6 +2,7 @@
 import * as ActMnu from '../menu.action.js'
 import * as ActOlm from '../../00.assetsaudio.unit/assetsaudio.action.js'
 import * as ActVoi from '../../01.voice.unit/voice.action.js'
+import * as ActCmp from '../../24.compliance.unit/compliance.action.js'
 import * as ActInp from '../../84.input.unit/input.action.js'
 
 import type { MenuModel } from '../menu.model.js'
@@ -152,8 +153,26 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                         promptRes?.putBit?.src || promptRes?.putBit?.dat?.value
                     if (enteredPath && promptRes?.putBit?.dat?.submitted) {
                         try {
-                            await ste.hunt(ActVoi.VALIDATE_SOURCE_INODE, {
-                                src: enteredPath,
+                            const voiRes: any = await ste.hunt(
+                                ActVoi.VALIDATE_SOURCE_INODE,
+                                {
+                                    src: enteredPath,
+                                },
+                            )
+                            const validatedPath =
+                                voiRes?.voiBit?.src || enteredPath
+                            const probeRes: any = await ste.hunt(
+                                ActCmp.PROBE_AUDIO_CONTAINER,
+                                {
+                                    src: validatedPath,
+                                },
+                            )
+                            const probeData =
+                                probeRes?.cmpBit?.dat ||
+                                ste.value?.compliance?.lastProbeResult
+                            await ste.hunt(ActCmp.CLASSIFY_SIGNAL_GEOMETRY, {
+                                dat: probeData,
+                                src: validatedPath,
                             })
                         } catch {}
                     }
