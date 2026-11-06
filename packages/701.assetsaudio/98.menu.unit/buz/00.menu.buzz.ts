@@ -296,6 +296,94 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                                                     dat: { recipe },
                                                 },
                                             )
+
+                                            const reviewList = [
+                                                '[COMMIT TO VAULT]',
+                                                '[<] CANCEL',
+                                            ]
+
+                                            bit = await global.LIBRARY.hunt(
+                                                UPDATE_GRID,
+                                                {
+                                                    x: 0,
+                                                    y: 4,
+                                                    xSpan: 4,
+                                                    ySpan: 8,
+                                                },
+                                            )
+                                            const reviewBit =
+                                                await global.LIBRARY.hunt(
+                                                    OPEN_CHOICE,
+                                                    {
+                                                        dat: {
+                                                            clr0: Color.BLACK,
+                                                            clr1: Color.YELLOW,
+                                                        },
+                                                        src: Align.VERTICAL,
+                                                        lst: reviewList,
+                                                        net: bit.grdBit.dat,
+                                                    },
+                                                )
+                                            const reviewSrc =
+                                                reviewBit?.chcBit?.src
+                                            if (
+                                                reviewSrc ===
+                                                    '[COMMIT TO VAULT]' ||
+                                                reviewSrc === 'COMMIT TO VAULT'
+                                            ) {
+                                                const promoSlug =
+                                                    slug === 'char_silas'
+                                                        ? 'silas_vane'
+                                                        : slug
+                                                await ste.hunt(
+                                                    ActVoi.EXECUTE_TWO_TIER_PROMOTION,
+                                                    {
+                                                        dat: {
+                                                            characterSlug:
+                                                                promoSlug,
+                                                            sourceAudioPath:
+                                                                validatedPath,
+                                                            targetVersionNumber: 1,
+                                                            operatorId:
+                                                                'lead_sound_designer',
+                                                            technicalMetrics: {
+                                                                lufs: -16.0,
+                                                                peakDbtp: -1.0,
+                                                                sampleRate: 48000,
+                                                                channels: 1,
+                                                            },
+                                                            qualitativeNotes:
+                                                                'Approved canonical master take.',
+                                                        },
+                                                    },
+                                                )
+                                                try {
+                                                    const res: any =
+                                                        await ste.hunt(
+                                                            ActOlm.EXECUTE_MASTER_AUDIT,
+                                                            {},
+                                                        )
+                                                    const rep = res?.asbBit?.dat
+                                                    if (rep) {
+                                                        await renderHud({
+                                                            health:
+                                                                rep.overallStatus ||
+                                                                'HEALTHY',
+                                                            bytes:
+                                                                rep
+                                                                    .storageQuotaAudit
+                                                                    ?.totalVaultBytes ??
+                                                                0,
+                                                            pct: String(
+                                                                rep
+                                                                    .storageQuotaAudit
+                                                                    ?.percentageUsed ??
+                                                                    '0.00',
+                                                            ),
+                                                        })
+                                                    }
+                                                } catch {}
+                                            }
                                         }
                                     } catch (err: any) {
                                         // Error telemetry emitted by configureVoiceRecipe
