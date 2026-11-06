@@ -1,3 +1,3 @@
 export default class FilterUnit {
-  constructor(state: any) {}
+    constructor(state: any) {}
 }
