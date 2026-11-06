@@ -18,6 +18,13 @@ export function reducer(
         case Act.AUDIT_POISON_BUFFERS:
             return Buzz.auditPoisonBuffers(clone(model, true), act.bale, state)
 
+
+        case Act.SWEEP_STORAGE_QUOTAS:
+            return Buzz.sweepStorageQuotas(clone(model, true), act.bale, state)
+
+        case Act.EXECUTE_MASTER_AUDIT:
+            return Buzz.executeMasterAudit(clone(model, true), act.bale, state)
+
         default:
             return model
     }

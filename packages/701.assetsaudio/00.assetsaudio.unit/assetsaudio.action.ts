@@ -41,10 +41,25 @@ export class ListAssetsAudio implements Action<AssetsAudioBit> {
     constructor(public bale?: AssetsAudioBit) {}
 }
 
-export type Actions =
-    | InitAssetsAudio
+
+export const SWEEP_STORAGE_QUOTAS = '[Sweeper action] Sweep Storage Quotas';
+export class SweepStorageQuotas implements Action<AssetsAudioBit> {
+  readonly type = SWEEP_STORAGE_QUOTAS;
+  constructor(public bale: AssetsAudioBit) {}
+}
+
+export const EXECUTE_MASTER_AUDIT = '[Master action] Execute Master Audit';
+export class ExecuteMasterAudit implements Action<AssetsAudioBit> {
+  readonly type = EXECUTE_MASTER_AUDIT;
+  constructor(public bale: AssetsAudioBit) {}
+}
+
+export type Actions = | InitAssetsAudio
     | ConfigureLfs
     | AuditPoisonBuffers
     | UpdateAssetsAudio
     | TestAssetsAudio
     | ListAssetsAudio
+
+    | SweepStorageQuotas
+    | ExecuteMasterAudit;
