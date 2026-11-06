@@ -22,6 +22,13 @@ export function reducer(
                 state,
             )
 
+        case Act.NORMALIZE_LOUDNESS:
+            return Buzz.normalizeLoudnessTwoPass(
+                clone(model, true),
+                act.bale,
+                state,
+            )
+
         default:
             return model
     }
