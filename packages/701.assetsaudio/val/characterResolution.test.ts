@@ -320,7 +320,7 @@ describe('Character Resolution Monotonic Versioning Feature Tests', () => {
         let matchResult: any = null
         await matchExistingCharacter(
             model,
-            {
+            { idx: "test-match",
                 src: testRoot,
                 slv: (res: any) => {
                     matchResult = res
@@ -353,7 +353,7 @@ describe('Character Resolution Monotonic Versioning Feature Tests', () => {
         let resolveResult: any = null
         await resolveMonotonicVersion(
             model,
-            {
+            { idx: "test-resolve",
                 dat: { characterSlug: 'char_bog' },
                 slv: (res: any) => {
                     resolveResult = res
