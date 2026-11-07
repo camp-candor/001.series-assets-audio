@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import fs from 'fs-extra'
 import path from 'path'
 import { createHash } from 'crypto'
-import { fileURLToPath } from 'url'
 import {
     auditVariationPoolDepth,
     initFoley,
@@ -24,12 +23,10 @@ import type {
     FoleyRegistryManifest,
 } from '../02.foley.unit/fce/foley.interface.js'
 
-const repoRoot = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..',
-    '..',
-    '..',
-)
+const repoRoot =
+    typeof __dirname !== 'undefined'
+        ? path.resolve(__dirname, '..', '..', '..')
+        : process.cwd()
 
 const CANONICAL_CUES: Record<string, string> = {
     rain_squall: 'locomotion',

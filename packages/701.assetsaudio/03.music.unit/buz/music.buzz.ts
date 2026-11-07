@@ -1,7 +1,6 @@
 import { createHash } from 'crypto'
 import fs from 'fs-extra'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import type { MusicModel } from '../music.model.js'
 import type MusicBit from '../fce/music.bit.js'
 import type {
@@ -26,13 +25,10 @@ const SHA256_PATTERN = /^[a-f0-9]{64}$/
 const DEFAULT_VOCAL_BAND_CEILING_DBFS = -18.0
 const DEFAULT_RECOMMENDED_DUCKING_DB = -9.0
 
-const MODULE_REPO_ROOT = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..',
-    '..',
-    '..',
-    '..',
-)
+const MODULE_REPO_ROOT =
+    typeof __dirname !== 'undefined'
+        ? path.resolve(__dirname, '..', '..', '..', '..')
+        : process.cwd()
 
 const emitConsole = async (ste: any, src: string): Promise<void> => {
     if (!ste?.hunt) return

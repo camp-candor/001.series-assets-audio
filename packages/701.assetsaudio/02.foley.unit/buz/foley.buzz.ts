@@ -1,6 +1,5 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import type { FoleyModel } from '../foley.model.js'
 import type FoleyBit from '../fce/foley.bit.js'
 import type {
@@ -32,13 +31,10 @@ export {
 const REQUIRED_SAMPLE_RATE_HZ = 48000
 const REQUIRED_BIT_DEPTH = 24
 
-const MODULE_REPO_ROOT = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..',
-    '..',
-    '..',
-    '..',
-)
+const MODULE_REPO_ROOT =
+    typeof __dirname !== 'undefined'
+        ? path.resolve(__dirname, '..', '..', '..', '..')
+        : process.cwd()
 
 const emitConsole = async (ste: any, src: string): Promise<void> => {
     if (!ste?.hunt) return

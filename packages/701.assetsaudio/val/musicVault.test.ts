@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createHash } from 'crypto'
 import fs from 'fs-extra'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import * as musicBuzz from '../03.music.unit/buz/music.buzz.js'
 import {
     auditVocalBandEnergy,
@@ -16,12 +15,10 @@ import type {
     MusicStemDefinition,
 } from '../03.music.unit/fce/music.interface.js'
 
-const repoRoot = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..',
-    '..',
-    '..',
-)
+const repoRoot =
+    typeof __dirname !== 'undefined'
+        ? path.resolve(__dirname, '..', '..', '..')
+        : process.cwd()
 
 const CANONICAL_STEMS: Record<string, { category: string; wav: string }> = {
     amb_diner_rain_hum: {

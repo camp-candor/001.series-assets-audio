@@ -254,11 +254,16 @@ describe('Cross-Repository Sync & Interlock Validator', () => {
             },
         }
 
-        const lockfile = compileAudioLockfile(process.cwd())
+        const liveRoot =
+            typeof __dirname !== 'undefined'
+                ? path.resolve(__dirname, '../../..')
+                : process.cwd()
+
+        const lockfile = compileAudioLockfile(liveRoot)
         expect(lockfile.merkle_root_sha256).toBeDefined()
         expect(lockfile.merkle_root_sha256.length).toBe(64)
 
-        const loreResult = verifyLoreCharacterAndCueParity(process.cwd())
+        const loreResult = verifyLoreCharacterAndCueParity(liveRoot)
         expect(loreResult).toBe(true)
 
         const lockfileTelemetry = hunted.find(

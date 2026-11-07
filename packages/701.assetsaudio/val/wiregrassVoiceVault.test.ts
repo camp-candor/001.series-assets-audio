@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import fs from 'fs-extra'
 import path from 'path'
 import { createHash } from 'crypto'
-import { fileURLToPath } from 'url'
 import {
     computeConsentDigest,
     evaluateLegalClearance,
@@ -25,12 +24,10 @@ import { VoiceModel } from '../01.voice.unit/voice.model.js'
 import { reducer } from '../01.voice.unit/voice.reduce.js'
 import * as Act from '../01.voice.unit/voice.action.js'
 
-const repoRoot = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..',
-    '..',
-    '..',
-)
+const repoRoot =
+    typeof __dirname !== 'undefined'
+        ? path.resolve(__dirname, '..', '..', '..')
+        : process.cwd()
 const LEADS = ['char_johnny_walkman', 'char_orbie_mayhaw']
 const GOBLIN_ROSTER = [
     'char_bog',
