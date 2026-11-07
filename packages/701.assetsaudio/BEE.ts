@@ -12,6 +12,7 @@ import InputUnit from './84.input.unit/input.unit.js'
 import CollectUnit from './97.collect.unit/collect.unit.js'
 import MenuUnit from './98.menu.unit/menu.unit.js'
 import BusUnit from './99.bus.unit/bus.unit.js'
+import SyncUnit from './25.sync.unit/sync.unit.js'
 
 import Assetsaudio from './00.assetsaudio.unit/fce/assetsaudio.interface.js'
 import { AssetsAudioModel } from './00.assetsaudio.unit/assetsaudio.model.js'
@@ -37,6 +38,8 @@ import Menu from './98.menu.unit/fce/menu.interface.js'
 import { MenuModel } from './98.menu.unit/menu.model.js'
 import Bus from './99.bus.unit/fce/bus.interface.js'
 import { BusModel } from './99.bus.unit/bus.model.js'
+import Sync from './25.sync.unit/fce/sync.interface.js'
+import { SyncModel } from './25.sync.unit/sync.model.js'
 
 export const list: Array<any> = [
     AssetsaudioUnit,
@@ -51,6 +54,7 @@ export const list: Array<any> = [
     CollectUnit,
     MenuUnit,
     BusUnit,
+    SyncUnit,
 ]
 
 import * as reduceFromAssetsaudio from './00.assetsaudio.unit/assetsaudio.reduce.js'
@@ -65,6 +69,7 @@ import * as reduceFromInput from './84.input.unit/input.reduce.js'
 import * as reduceFromCollect from './97.collect.unit/collect.reduce.js'
 import * as reduceFromMenu from './98.menu.unit/menu.reduce.js'
 import * as reduceFromBus from './99.bus.unit/bus.reduce.js'
+import * as reduceFromSync from './25.sync.unit/sync.reduce.js'
 
 export const reducer: any = {
     assetsaudio: reduceFromAssetsaudio.reducer,
@@ -79,6 +84,7 @@ export const reducer: any = {
     collect: reduceFromCollect.reducer,
     menu: reduceFromMenu.reducer,
     bus: reduceFromBus.reducer,
+    sync: reduceFromSync.reducer,
 }
 
 export default class UnitData implements Model {
@@ -94,4 +100,5 @@ export default class UnitData implements Model {
     collect: Collect = new CollectModel()
     menu: Menu = new MenuModel()
     bus: Bus = new BusModel()
+    sync: Sync = new SyncModel()
 }

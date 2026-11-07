@@ -1,0 +1,5 @@
+export const INIT_SYNC = '[Sync action] Init Sync';
+export const COMPILE_LOCKFILE = '[Sync action] Compile Lockfile';
+export const SYNC_FLEET = '[Sync action] Sync Fleet';
+export const AUDIT_LOCKFILE = '[Sync action] Audit Lockfile';
+export const CALCULATE_BLAST_RADIUS = '[Sync action] Calculate Blast Radius';
