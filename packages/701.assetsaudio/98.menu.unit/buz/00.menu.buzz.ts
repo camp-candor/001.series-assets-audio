@@ -9,6 +9,9 @@ import * as ActRed from '../../14.redaction.unit/redaction.action.js'
 import * as ActDes from '../../16.deesser.unit/deesser.action.js'
 import * as ActCmp from '../../24.compliance.unit/compliance.action.js'
 import * as ActInp from '../../84.input.unit/input.action.js'
+import { auditionVoiceTake } from './auditionTake.buzz.js'
+import { compareVoiceTimbre } from './timbreComparison.buzz.js'
+import { verifyCasLedgerIntegrity } from '../../97.collect.unit/buz/shaSealer.buzz.js'
 
 import type { MenuModel } from '../menu.model.js'
 import type MenuBit from '../fce/menu.bit.js'
@@ -311,6 +314,9 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
         '[VERIFY ACOUSTIC CADENCE]',
         '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
+        '[AUDITION VOICE TAKE]',
+        '[COMPARE VOICE TIMBRE]',
+        '[VERIFY CAS LEDGER]',
         '[VALIDATE FOLEY REGISTRY]',
         '[VALIDATE MUSIC MANIFEST]',
         '[MANAGE CONDITION VAULT]',
@@ -810,6 +816,21 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
             try {
                 if (ste?.hunt) await ste.hunt(ActMus.VERIFY_LOOP_BOUNDARIES, {})
             } catch {}
+            try {
+                await verifyCasLedgerIntegrity(process.cwd())
+            } catch {}
+            try {
+                await auditionVoiceTake(
+                    'voices/active/char_silas.wav',
+                    'char_silas',
+                )
+            } catch {}
+            try {
+                await compareVoiceTimbre(
+                    { id: 'char_silas_v1' },
+                    { id: 'char_silas_v2' },
+                )
+            } catch {}
             // Feature 2.3 master audit gauntlet; live telemetry via console bridge
             try {
                 if (ste?.hunt) {
@@ -930,6 +951,48 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                 await global.LIBRARY.hunt(UPDATE_CONSOLE, {
                     idx: 'cns00',
                     src: `>> [MUSIC:MANIFEST:HALT] ${err?.message || err}`,
+                })
+            }
+            break
+
+        case '[AUDITION VOICE TAKE]':
+        case 'AUDITION VOICE TAKE':
+            try {
+                await auditionVoiceTake(
+                    'voices/active/char_silas.wav',
+                    'char_silas',
+                )
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [AUDITION:HALT] ${err?.message || err}`,
+                })
+            }
+            break
+
+        case '[COMPARE VOICE TIMBRE]':
+        case 'COMPARE VOICE TIMBRE':
+            try {
+                await compareVoiceTimbre(
+                    { id: 'char_silas_v1' },
+                    { id: 'char_silas_v2' },
+                )
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [TIMBRE:HALT] ${err?.message || err}`,
+                })
+            }
+            break
+
+        case '[VERIFY CAS LEDGER]':
+        case 'VERIFY CAS LEDGER':
+            try {
+                await verifyCasLedgerIntegrity(process.cwd())
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [CAS:HALT] ${err?.message || err}`,
                 })
             }
             break
