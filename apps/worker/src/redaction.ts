@@ -82,3 +82,22 @@ export function redactObject<T>(input: T): T {
 
     return cleanObj as T
 }
+
+export function verifyEdgeRedactionCompliance(metadata: string): boolean {
+  if (/[^\x00-\x7F]/.test(metadata)) {
+    return false;
+  }
+  try {
+    const data = JSON.parse(metadata);
+    if (data.redaction_window) {
+      const { start_ms, end_ms } = data.redaction_window;
+      if (typeof start_ms !== 'number' || typeof end_ms !== 'number') return false;
+      if (start_ms < 0 || start_ms >= end_ms) {
+        return false;
+      }
+    }
+  } catch (e: any) {
+    return false;
+  }
+  return true;
+}
