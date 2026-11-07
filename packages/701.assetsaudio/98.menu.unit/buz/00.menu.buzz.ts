@@ -2,6 +2,7 @@
 import * as ActMnu from '../menu.action.js'
 import * as ActOlm from '../../00.assetsaudio.unit/assetsaudio.action.js'
 import * as ActVoi from '../../01.voice.unit/voice.action.js'
+import * as ActFol from '../../02.foley.unit/foley.action.js'
 import * as ActFil from '../../11.filter.unit/filter.action.js'
 import * as ActRed from '../../14.redaction.unit/redaction.action.js'
 import * as ActDes from '../../16.deesser.unit/deesser.action.js'
@@ -309,6 +310,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
         '[VERIFY ACOUSTIC CADENCE]',
         '[SWEEP STORAGE QUOTAS]',
         '[AUDIT VAULT HEALTH]',
+        '[VALIDATE FOLEY REGISTRY]',
         '[MANAGE CONDITION VAULT]',
         'ROOT MENU',
     ]
@@ -792,6 +794,13 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
             try {
                 if (ste?.hunt) await ste.hunt(ActVoi.AUDIT_ORPHAN_TAKES, {})
             } catch {}
+            try {
+                if (ste?.hunt)
+                    await ste.hunt(ActFol.VALIDATE_FOLEY_REGISTRY, {})
+            } catch {}
+            try {
+                if (ste?.hunt) await ste.hunt(ActFol.VERIFY_VARIATION_POOLS, {})
+            } catch {}
             // Feature 2.3 master audit gauntlet; live telemetry via console bridge
             try {
                 if (ste?.hunt) {
@@ -882,6 +891,21 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
             try {
                 await manageConditionVault(ste)
             } catch {}
+            break
+
+        case '[VALIDATE FOLEY REGISTRY]':
+        case 'VALIDATE FOLEY REGISTRY':
+            try {
+                if (ste?.hunt) {
+                    await ste.hunt(ActFol.VALIDATE_FOLEY_REGISTRY, {})
+                    await ste.hunt(ActFol.VERIFY_VARIATION_POOLS, {})
+                }
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [FOLEY:REGISTRY:HALT] ${err?.message || err}`,
+                })
+            }
             break
 
         case 'ROOT MENU':
