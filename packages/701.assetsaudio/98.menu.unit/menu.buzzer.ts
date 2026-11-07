@@ -1,3 +1,8 @@
 export { initMenu } from './buz/00.menu.buzz.js'
 export { updateMenu } from './buz/00.menu.buzz.js'
 export { bridgeConsole } from './buz/00.menu.buzz.js'
+export { auditionVoiceTake } from './buz/auditionTake.buzz.js'
+export { compareVoiceTimbre } from './buz/timbreComparison.buzz.js'
+export { authorVocalDirectionNotes } from './buz/authorVoiceNotes.buzz.js'
+export { demoteActiveVoiceVersion } from './buz/demoteVoice.buzz.js'
+export { registerDialectOverride } from './buz/registerDialect.buzz.js'
