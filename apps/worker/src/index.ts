@@ -1,7 +1,11 @@
 import { Hono } from 'hono'
 import { createAgentWorker } from '@funtuantw/pi-agent-cf'
-import { coreTools, type Env } from './tools.core.js'
+import { coreTools, type Env as CoreEnv } from './tools.core.js'
 // import { customTools } from './tools.custom.js'
+import { uploadRoutes } from './routes/uploadRoutes.js';
+import { AudioLeaseDO } from './durable_objects/AudioLeaseDO.js';
+import { runScheduledStorageSweeper } from './crons/storageSweeper.js';
+import { Env } from './types/env.js';
 
 // ----------------------------------------------------------------------------
 // :: DETERMINISTIC LLM & DEVOPS SYSTEM PROMPT
@@ -22,7 +26,7 @@ const cfModel: any = {
     },
 }
 
-const dynamicWorker = createAgentWorker<Env>({
+const dynamicWorker = createAgentWorker<CoreEnv>({
     systemPrompt: (env) => {
         cfModel.baseUrl = `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/ai/v1`
 
@@ -53,7 +57,7 @@ OPERATIONAL INVARIANTS:
 // :: HONO ROUTER
 // ----------------------------------------------------------------------------
 
-const app = new Hono<{ Bindings: Env }>()
+const app = new Hono<{ Bindings: CoreEnv & Env }>()
 
 // Root Health & Verification Endpoint
 app.get('/', (c) => c.text('REPO-BOT EDGE CONTROL PLANE IS LIVE'))
@@ -88,6 +92,9 @@ app.get('/oracle', async (c) => {
     }
 })
 
+// Add new routes *before* the wildcard catch-all!
+app.route('/', uploadRoutes);
+
 // Durable Object Session Ingress
 app.all('/*', async (c) => {
     if (!dynamicWorker.handler.fetch) return c.text('Handler missing', 500)
@@ -99,4 +106,19 @@ app.all('/*', async (c) => {
 })
 
 export const AgentSessionDO = dynamicWorker.AgentSessionDO
-export default app
+export { AudioLeaseDO };
+
+const originalScheduled = dynamicWorker.handler.scheduled;
+const newScheduled = async (event: any, env: any, ctx: any) => {
+  if (originalScheduled) {
+    await originalScheduled(event, env, ctx);
+  }
+  ctx.waitUntil(runScheduledStorageSweeper(event, env));
+};
+
+// To replace the default fetch and scheduled we'll patch the default export
+const originalFetch = app.fetch;
+export default {
+  fetch: originalFetch,
+  scheduled: newScheduled
+};
