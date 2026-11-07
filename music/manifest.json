@@ -1,0 +1,51 @@
+{
+    "schema_version": "1.0.0",
+    "series_scope": "the_parallax_dinner",
+    "stems": {
+        "amb_diner_rain_hum": {
+            "stem_id": "amb_diner_rain_hum",
+            "category": "ambient",
+            "wav_path": "music/ambient/amb_diner_rain_hum.wav",
+            "sha256": "ed6a27b76e5732ba3600db937187416b48b16117abc1a0f77b17b72d70706933",
+            "sample_rate_hz": 48000,
+            "bit_depth": 24,
+            "channels": 1,
+            "duration_ms": 2000,
+            "loop_seamless": true,
+            "zero_crossing_delta": 0,
+            "vocal_band_ceiling_dbfs": -18,
+            "recommended_ducking_db": -9,
+            "description": "60 Hz diner fluorescent hum with South Georgia rain wash for The Parallax Dinner."
+        },
+        "scr_wiregrass_tension_low": {
+            "stem_id": "scr_wiregrass_tension_low",
+            "category": "score",
+            "wav_path": "music/score/scr_wiregrass_tension_low.wav",
+            "sha256": "3c5ca6c59ba4cb68161f4141cdc0ca30fd14679ece14fd3e50618ed0093482de",
+            "sample_rate_hz": 48000,
+            "bit_depth": 24,
+            "channels": 1,
+            "duration_ms": 2000,
+            "loop_seamless": true,
+            "zero_crossing_delta": 0,
+            "vocal_band_ceiling_dbfs": -17,
+            "recommended_ducking_db": -8,
+            "description": "Sub-bass wiregrass tension drone for The Parallax Dinner."
+        },
+        "scr_parallax_revelation_pad": {
+            "stem_id": "scr_parallax_revelation_pad",
+            "category": "score",
+            "wav_path": "music/score/scr_parallax_revelation_pad.wav",
+            "sha256": "e83001d3678b88875bd617343f783313be12eb0ff868758518878216d720eb0a",
+            "sample_rate_hz": 48000,
+            "bit_depth": 24,
+            "channels": 1,
+            "duration_ms": 2000,
+            "loop_seamless": true,
+            "zero_crossing_delta": 0,
+            "vocal_band_ceiling_dbfs": -16,
+            "recommended_ducking_db": -9,
+            "description": "Harmonic revelation pad for The Parallax Dinner."
+        }
+    }
+}
