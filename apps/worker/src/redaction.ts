@@ -87,15 +87,18 @@ export function redactObject<T>(input: T): T {
  * Validates that asset metadata strings are pure 7-bit ASCII and that any declared redaction window
  * [start_ms, end_ms] satisfies 0 <= start_ms < end_ms and 1,000 Hz tone / silence specification.
  */
-export function verifyEdgeRedactionCompliance(metadataString: string, redactionWindow?: [number, number]) {
+export function verifyEdgeRedactionCompliance(
+    metadataString: string,
+    redactionWindow?: [number, number],
+) {
     if (!/^[\x00-\x7F]*$/.test(metadataString)) {
-        throw new Error("Metadata must be pure 7-bit ASCII");
+        throw new Error('Metadata must be pure 7-bit ASCII')
     }
 
     if (redactionWindow) {
-        const [start_ms, end_ms] = redactionWindow;
+        const [start_ms, end_ms] = redactionWindow
         if (!(0 <= start_ms && start_ms < end_ms)) {
-            throw new Error("REDACTION_WINDOW_INVALID_BREACH");
+            throw new Error('REDACTION_WINDOW_INVALID_BREACH')
         }
         // Specific tone/silence checks could go here, but validation implies logical range check
     }
