@@ -1,0 +1,348 @@
+{
+    "schema_version": "1.0.0",
+    "series_scope": "the_parallax_dinner",
+    "cues": {
+        "rain_squall": {
+            "cue_slug": "rain_squall",
+            "category": "locomotion",
+            "description": "Thunderstorm squall wash with rain hiss and low rumble.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "rain_squall_01",
+                    "wav_path": "foley/locomotion/rain_squall_01.wav",
+                    "sha256": "28ea17308a4840b9eb17ae7c0a2bdd281216b8c13d177a3a00ebcdf3cb8c8ec1",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2342,
+                    "peak_dbfs": -1.03
+                },
+                {
+                    "variant_id": "rain_squall_02",
+                    "wav_path": "foley/locomotion/rain_squall_02.wav",
+                    "sha256": "276ea2c84ec003f3105559b904128e1d26d48f96675d1093414ad4d684457e6a",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2363,
+                    "peak_dbfs": -1.03
+                },
+                {
+                    "variant_id": "rain_squall_03",
+                    "wav_path": "foley/locomotion/rain_squall_03.wav",
+                    "sha256": "ad28a4b7f7f1e28c361419fc0bb8ec5623c4218488ab0f37827b7587a512347b",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2405,
+                    "peak_dbfs": -1.03
+                }
+            ]
+        },
+        "diesel_idle": {
+            "cue_slug": "diesel_idle",
+            "category": "locomotion",
+            "description": "Idling semi diesel engine loop with cylinder knock.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "diesel_idle_01",
+                    "wav_path": "foley/locomotion/diesel_idle_01.wav",
+                    "sha256": "fcf16d85cb8aaa7ef6edaeaa70dbe2664c0637c380b2701b18c18b004e10150a",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1859,
+                    "peak_dbfs": -1.43
+                },
+                {
+                    "variant_id": "diesel_idle_02",
+                    "wav_path": "foley/locomotion/diesel_idle_02.wav",
+                    "sha256": "d138c877b68fd739966f6c2eeca749182d9fbc872261c43d58a9d37c5ded0c0f",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1749,
+                    "peak_dbfs": -1.38
+                },
+                {
+                    "variant_id": "diesel_idle_03",
+                    "wav_path": "foley/locomotion/diesel_idle_03.wav",
+                    "sha256": "11d75a985bf2394feeba60b45b535d6d06d96c03c14044d0fe28f9f1020f9860",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1832,
+                    "peak_dbfs": -1.29
+                }
+            ]
+        },
+        "semi_pass": {
+            "cue_slug": "semi_pass",
+            "category": "locomotion",
+            "description": "Highway semi truck pass-by with doppler engine sweep.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "semi_pass_01",
+                    "wav_path": "foley/locomotion/semi_pass_01.wav",
+                    "sha256": "b25ec7462c80c1a1ce1fea1d5eb8083c95a74630a43f25b78435c8dcd0bfa025",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2610,
+                    "peak_dbfs": -1.24
+                },
+                {
+                    "variant_id": "semi_pass_02",
+                    "wav_path": "foley/locomotion/semi_pass_02.wav",
+                    "sha256": "ca19b6012935e3c23315f36cde217fcc61a45d7e1bb4cb95a3c0e4c32dfb8995",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2613,
+                    "peak_dbfs": -1.28
+                },
+                {
+                    "variant_id": "semi_pass_03",
+                    "wav_path": "foley/locomotion/semi_pass_03.wav",
+                    "sha256": "d59bb0a51aac72b3589b6151ffd965245ff1c8141f6dfe8ebfb5732a407d0165",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 2627,
+                    "peak_dbfs": -1.26
+                }
+            ]
+        },
+        "door_hiss": {
+            "cue_slug": "door_hiss",
+            "category": "impacts",
+            "description": "Diner door pneumatic hiss and closer thud.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "door_hiss_01",
+                    "wav_path": "foley/impacts/door_hiss_01.wav",
+                    "sha256": "ce7149e2c5436efab685e46afe6e7d1a9c080579003383091ae6b2e90b0b3d3a",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 938,
+                    "peak_dbfs": -1.01
+                },
+                {
+                    "variant_id": "door_hiss_02",
+                    "wav_path": "foley/impacts/door_hiss_02.wav",
+                    "sha256": "e4d98a9801f3e83d264b7e5a4b04e1681b2bdaa5397760e03f54648ddeda031c",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 876,
+                    "peak_dbfs": -1.02
+                },
+                {
+                    "variant_id": "door_hiss_03",
+                    "wav_path": "foley/impacts/door_hiss_03.wav",
+                    "sha256": "be6ad7ebbf04fc961b6f518538d74f14b538344d0af373f22f90394d5e805966",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 920,
+                    "peak_dbfs": -1.02
+                }
+            ]
+        },
+        "booth_creak": {
+            "cue_slug": "booth_creak",
+            "category": "impacts",
+            "description": "Vinyl booth bench creak under shifting weight.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "booth_creak_01",
+                    "wav_path": "foley/impacts/booth_creak_01.wav",
+                    "sha256": "017fde8b4991c34f0d4ba8fd531eb89e819d640a4053b3d0c362a5362780df05",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1535,
+                    "peak_dbfs": -1.52
+                },
+                {
+                    "variant_id": "booth_creak_02",
+                    "wav_path": "foley/impacts/booth_creak_02.wav",
+                    "sha256": "ac95ad635f8b744c7e8c076ad53f450623687fdbd3fd0acc189cfc8dca5f52f6",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1536,
+                    "peak_dbfs": -1.49
+                },
+                {
+                    "variant_id": "booth_creak_03",
+                    "wav_path": "foley/impacts/booth_creak_03.wav",
+                    "sha256": "2dde5a1363525369eba95531abb77a3d0f1b6615a55bcd427ea995368e96070b",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1501,
+                    "peak_dbfs": -1.52
+                }
+            ]
+        },
+        "menu_drop": {
+            "cue_slug": "menu_drop",
+            "category": "impacts",
+            "description": "Laminated menu slap down on laminate tabletop.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "menu_drop_01",
+                    "wav_path": "foley/impacts/menu_drop_01.wav",
+                    "sha256": "5383e92f163f31a39468145eef66b2c9c07047ad886358b70055c12bd4807620",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 521,
+                    "peak_dbfs": -1.04
+                },
+                {
+                    "variant_id": "menu_drop_02",
+                    "wav_path": "foley/impacts/menu_drop_02.wav",
+                    "sha256": "25e5ad2282aed03bc26ae51924e43608ac50254d52826773389514fb30177647",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 597,
+                    "peak_dbfs": -1.03
+                },
+                {
+                    "variant_id": "menu_drop_03",
+                    "wav_path": "foley/impacts/menu_drop_03.wav",
+                    "sha256": "084b2ba1753a733f542eb2611cae8a579fc3be55d01dd69db3e4f384f19d84c5",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 562,
+                    "peak_dbfs": -1.04
+                }
+            ]
+        },
+        "coffee_pour": {
+            "cue_slug": "coffee_pour",
+            "category": "handling",
+            "description": "Coffee pot pour with bubbling stream and cup fill.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "coffee_pour_01",
+                    "wav_path": "foley/handling/coffee_pour_01.wav",
+                    "sha256": "4934fbe91a6513b394460c708a41328768a7755fb5b6df6e0e0f3741fdc19c4f",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1740,
+                    "peak_dbfs": -1.32
+                },
+                {
+                    "variant_id": "coffee_pour_02",
+                    "wav_path": "foley/handling/coffee_pour_02.wav",
+                    "sha256": "34e089380f110f8a4b2f82c6b5853c937a9a872e67d82797ba7cad6affced2f2",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1706,
+                    "peak_dbfs": -1.33
+                },
+                {
+                    "variant_id": "coffee_pour_03",
+                    "wav_path": "foley/handling/coffee_pour_03.wav",
+                    "sha256": "103bc52400dcd33cb13968c6f82d4606b17b6546c90d3ec057c722091c1c6822",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 1658,
+                    "peak_dbfs": -1.37
+                }
+            ]
+        },
+        "wipe_tear": {
+            "cue_slug": "wipe_tear",
+            "category": "handling",
+            "description": "Paper napkin wipe and tear across tabletop.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "wipe_tear_01",
+                    "wav_path": "foley/handling/wipe_tear_01.wav",
+                    "sha256": "e7f6c87da873d5a1977fabb73e3e62bfeefdb882332b8aa8498e1770abcfdcb6",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 902,
+                    "peak_dbfs": -1.01
+                },
+                {
+                    "variant_id": "wipe_tear_02",
+                    "wav_path": "foley/handling/wipe_tear_02.wav",
+                    "sha256": "6f6b28978c8ba211524fdff11978c3fc2f2a8c85849c21c69d2b6091f6147c79",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 953,
+                    "peak_dbfs": -1.01
+                },
+                {
+                    "variant_id": "wipe_tear_03",
+                    "wav_path": "foley/handling/wipe_tear_03.wav",
+                    "sha256": "3cc1d776ad0cc4570171ddef1b9d87fd2f14e72ffdf607b80d4243752f690b90",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 904,
+                    "peak_dbfs": -1.01
+                }
+            ]
+        },
+        "lens_click": {
+            "cue_slug": "lens_click",
+            "category": "handling",
+            "description": "Rangefinder lens focus click with mechanical snap.",
+            "min_variants_required": 3,
+            "variants": [
+                {
+                    "variant_id": "lens_click_01",
+                    "wav_path": "foley/handling/lens_click_01.wav",
+                    "sha256": "8831192116b8b2ba5d0161be54b1a1d199901dfaa8cc144470217d281690fddd",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 264,
+                    "peak_dbfs": -1.02
+                },
+                {
+                    "variant_id": "lens_click_02",
+                    "wav_path": "foley/handling/lens_click_02.wav",
+                    "sha256": "b8352e26a8114415777d920fe1836483311279e6e61eb0f37ed544b74f915fd3",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 235,
+                    "peak_dbfs": -1.02
+                },
+                {
+                    "variant_id": "lens_click_03",
+                    "wav_path": "foley/handling/lens_click_03.wav",
+                    "sha256": "6e2ac3e887ea4dbc838f2715ddc11a594fbffd6aa86fae03b0893b025db5af72",
+                    "sample_rate_hz": 48000,
+                    "bit_depth": 24,
+                    "channels": 1,
+                    "duration_ms": 286,
+                    "peak_dbfs": -1.03
+                }
+            ]
+        }
+    }
+}
