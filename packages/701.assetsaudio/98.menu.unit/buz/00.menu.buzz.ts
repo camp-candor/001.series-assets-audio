@@ -107,9 +107,9 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     bit = await global.LIBRARY.hunt(UPDATE_GRID, {
         x: 0,
-        y: 0,
+        y: 4,
         xSpan: 4,
-        ySpan: 4,
+        ySpan: 8,
     })
     bit = await global.LIBRARY.hunt(WRITE_CONSOLE, {
         idx: HUD_CONSOLE,
