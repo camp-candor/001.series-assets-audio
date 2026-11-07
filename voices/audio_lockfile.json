@@ -1,235 +1,235 @@
 {
-  "schema_version": "1.0.0",
-  "series_scope": "default",
-  "merkle_root_sha256": "2a72e1550a633bdcfc4bc66262af6ddce7f145b70e55fe6c0012e898f6c46641",
-  "voice_manifest_sha256": "60f106e10b61dd9ace4d4155e49b6f3cdffc75d04ef0cac15fe8a556c7f2e18b",
-  "lexicon_sha256": "8f8ddc63df97a0a078c8352506677bec9b68798de1f8e6e01dab637bb61b2ab5",
-  "foley_registry_sha256": "7bca105d7e7a730952870ebaebea1b827ed4e7693aced3e09c18e25ad6af266c",
-  "music_manifest_sha256": "87d5322559de85c1b9f3ae4ed8803b83f6a7fd8fcb69955eb5951db76545cd03",
-  "assets": {
-    "char_billie_fae": {
-      "asset_id": "char_billie_fae",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_bog": {
-      "asset_id": "char_bog",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_fib": {
-      "asset_id": "char_fib",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_gaffer_sludge": {
-      "asset_id": "char_gaffer_sludge",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_johnny_walkman": {
-      "asset_id": "char_johnny_walkman",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": "e51282d99a6f04db65b45f55e2911361351a7e8475bed69205e06ec85fc1c269"
-    },
-    "char_mum_grissel": {
-      "asset_id": "char_mum_grissel",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_orbie_mayhaw": {
-      "asset_id": "char_orbie_mayhaw",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": "214f877514501913056ca1d449ea47c17ca55612eac9b2a60ca71b4c3130745c"
-    },
-    "char_silas": {
-      "asset_id": "char_silas",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "char_wattle": {
-      "asset_id": "char_wattle",
-      "domain": "voice",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Mayhaw": {
-      "asset_id": "Mayhaw",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Okefenokee": {
-      "asset_id": "Okefenokee",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "astigmatism": {
-      "asset_id": "astigmatism",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Phoropter": {
-      "asset_id": "Phoropter",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Wiregrass": {
-      "asset_id": "Wiregrass",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Walkman": {
-      "asset_id": "Walkman",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Orbie": {
-      "asset_id": "Orbie",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Parallax": {
-      "asset_id": "Parallax",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Grissel": {
-      "asset_id": "Grissel",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Wattle": {
-      "asset_id": "Wattle",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "Candor": {
-      "asset_id": "Candor",
-      "domain": "lexicon",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "rain_squall": {
-      "asset_id": "rain_squall",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "diesel_idle": {
-      "asset_id": "diesel_idle",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "semi_pass": {
-      "asset_id": "semi_pass",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "door_hiss": {
-      "asset_id": "door_hiss",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "booth_creak": {
-      "asset_id": "booth_creak",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "menu_drop": {
-      "asset_id": "menu_drop",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "coffee_pour": {
-      "asset_id": "coffee_pour",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "wipe_tear": {
-      "asset_id": "wipe_tear",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "lens_click": {
-      "asset_id": "lens_click",
-      "domain": "foley",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": ""
-    },
-    "amb_diner_rain_hum": {
-      "asset_id": "amb_diner_rain_hum",
-      "domain": "music",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": "ed6a27b76e5732ba3600db937187416b48b16117abc1a0f77b17b72d70706933"
-    },
-    "scr_wiregrass_tension_low": {
-      "asset_id": "scr_wiregrass_tension_low",
-      "domain": "music",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": "3c5ca6c59ba4cb68161f4141cdc0ca30fd14679ece14fd3e50618ed0093482de"
-    },
-    "scr_parallax_revelation_pad": {
-      "asset_id": "scr_parallax_revelation_pad",
-      "domain": "music",
-      "path": "",
-      "version": "1.0.0",
-      "sha256": "e83001d3678b88875bd617343f783313be12eb0ff868758518878216d720eb0a"
+    "schema_version": "1.0.0",
+    "series_scope": "default",
+    "merkle_root_sha256": "2a72e1550a633bdcfc4bc66262af6ddce7f145b70e55fe6c0012e898f6c46641",
+    "voice_manifest_sha256": "60f106e10b61dd9ace4d4155e49b6f3cdffc75d04ef0cac15fe8a556c7f2e18b",
+    "lexicon_sha256": "8f8ddc63df97a0a078c8352506677bec9b68798de1f8e6e01dab637bb61b2ab5",
+    "foley_registry_sha256": "7bca105d7e7a730952870ebaebea1b827ed4e7693aced3e09c18e25ad6af266c",
+    "music_manifest_sha256": "87d5322559de85c1b9f3ae4ed8803b83f6a7fd8fcb69955eb5951db76545cd03",
+    "assets": {
+        "char_billie_fae": {
+            "asset_id": "char_billie_fae",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_bog": {
+            "asset_id": "char_bog",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_fib": {
+            "asset_id": "char_fib",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_gaffer_sludge": {
+            "asset_id": "char_gaffer_sludge",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_johnny_walkman": {
+            "asset_id": "char_johnny_walkman",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": "e51282d99a6f04db65b45f55e2911361351a7e8475bed69205e06ec85fc1c269"
+        },
+        "char_mum_grissel": {
+            "asset_id": "char_mum_grissel",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_orbie_mayhaw": {
+            "asset_id": "char_orbie_mayhaw",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": "214f877514501913056ca1d449ea47c17ca55612eac9b2a60ca71b4c3130745c"
+        },
+        "char_silas": {
+            "asset_id": "char_silas",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "char_wattle": {
+            "asset_id": "char_wattle",
+            "domain": "voice",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Mayhaw": {
+            "asset_id": "Mayhaw",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Okefenokee": {
+            "asset_id": "Okefenokee",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "astigmatism": {
+            "asset_id": "astigmatism",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Phoropter": {
+            "asset_id": "Phoropter",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Wiregrass": {
+            "asset_id": "Wiregrass",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Walkman": {
+            "asset_id": "Walkman",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Orbie": {
+            "asset_id": "Orbie",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Parallax": {
+            "asset_id": "Parallax",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Grissel": {
+            "asset_id": "Grissel",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Wattle": {
+            "asset_id": "Wattle",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "Candor": {
+            "asset_id": "Candor",
+            "domain": "lexicon",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "rain_squall": {
+            "asset_id": "rain_squall",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "diesel_idle": {
+            "asset_id": "diesel_idle",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "semi_pass": {
+            "asset_id": "semi_pass",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "door_hiss": {
+            "asset_id": "door_hiss",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "booth_creak": {
+            "asset_id": "booth_creak",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "menu_drop": {
+            "asset_id": "menu_drop",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "coffee_pour": {
+            "asset_id": "coffee_pour",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "wipe_tear": {
+            "asset_id": "wipe_tear",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "lens_click": {
+            "asset_id": "lens_click",
+            "domain": "foley",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": ""
+        },
+        "amb_diner_rain_hum": {
+            "asset_id": "amb_diner_rain_hum",
+            "domain": "music",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": "ed6a27b76e5732ba3600db937187416b48b16117abc1a0f77b17b72d70706933"
+        },
+        "scr_wiregrass_tension_low": {
+            "asset_id": "scr_wiregrass_tension_low",
+            "domain": "music",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": "3c5ca6c59ba4cb68161f4141cdc0ca30fd14679ece14fd3e50618ed0093482de"
+        },
+        "scr_parallax_revelation_pad": {
+            "asset_id": "scr_parallax_revelation_pad",
+            "domain": "music",
+            "path": "",
+            "version": "1.0.0",
+            "sha256": "e83001d3678b88875bd617343f783313be12eb0ff868758518878216d720eb0a"
+        }
     }
-  }
 }

@@ -1,3 +1,3 @@
 export default interface Sync {
-    idx: string;
+    idx: string
 }

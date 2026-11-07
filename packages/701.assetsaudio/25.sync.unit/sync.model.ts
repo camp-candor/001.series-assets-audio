@@ -1,5 +1,5 @@
-import Sync from './fce/sync.interface.js';
+import Sync from './fce/sync.interface.js'
 
 export class SyncModel implements Sync {
-    idx: string = 'sync';
+    idx: string = 'sync'
 }

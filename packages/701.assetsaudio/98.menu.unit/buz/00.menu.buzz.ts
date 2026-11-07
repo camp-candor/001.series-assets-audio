@@ -12,6 +12,8 @@ import * as ActInp from '../../84.input.unit/input.action.js'
 import { auditionVoiceTake } from './auditionTake.buzz.js'
 import { compareVoiceTimbre } from './timbreComparison.buzz.js'
 import { verifyCasLedgerIntegrity } from '../../97.collect.unit/buz/shaSealer.buzz.js'
+import { compileAudioLockfile } from '../../25.sync.unit/buz/fleetSync.buzz.js'
+import { verifyLoreCharacterAndCueParity } from '../../00.assetsaudio.unit/buz/loreParity.buzz.js'
 
 import type { MenuModel } from '../menu.model.js'
 import type MenuBit from '../fce/menu.bit.js'
@@ -317,6 +319,8 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
         '[AUDITION VOICE TAKE]',
         '[COMPARE VOICE TIMBRE]',
         '[VERIFY CAS LEDGER]',
+        '[COMPILE AUDIO LOCKFILE]',
+        '[VERIFY LORE PARITY]',
         '[VALIDATE FOLEY REGISTRY]',
         '[VALIDATE MUSIC MANIFEST]',
         '[MANAGE CONDITION VAULT]',
@@ -831,6 +835,12 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                     { id: 'char_silas_v2' },
                 )
             } catch {}
+            try {
+                compileAudioLockfile(process.cwd())
+            } catch {}
+            try {
+                verifyLoreCharacterAndCueParity(process.cwd())
+            } catch {}
             // Feature 2.3 master audit gauntlet; live telemetry via console bridge
             try {
                 if (ste?.hunt) {
@@ -993,6 +1003,30 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
                 await global.LIBRARY.hunt(UPDATE_CONSOLE, {
                     idx: 'cns00',
                     src: `>> [CAS:HALT] ${err?.message || err}`,
+                })
+            }
+            break
+
+        case '[COMPILE AUDIO LOCKFILE]':
+        case 'COMPILE AUDIO LOCKFILE':
+            try {
+                compileAudioLockfile(process.cwd())
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [SYNC:HALT] ${err?.message || err}`,
+                })
+            }
+            break
+
+        case '[VERIFY LORE PARITY]':
+        case 'VERIFY LORE PARITY':
+            try {
+                verifyLoreCharacterAndCueParity(process.cwd())
+            } catch (err: any) {
+                await global.LIBRARY.hunt(UPDATE_CONSOLE, {
+                    idx: 'cns00',
+                    src: `>> [LORE:HALT] ${err?.message || err}`,
                 })
             }
             break
