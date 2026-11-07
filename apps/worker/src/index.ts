@@ -1,3 +1,7 @@
+
+import { uploadRoutes } from './routes/uploadRoutes.js';
+import { runScheduledStorageSweeper } from './crons/storageSweeper.js';
+import { AudioLeaseDO } from './durable_objects/AudioLeaseDO.js';
 import { Hono } from 'hono'
 import { createAgentWorker } from '@funtuantw/pi-agent-cf'
 import { coreTools, type Env } from './tools.core.js'
@@ -58,6 +62,9 @@ const app = new Hono<{ Bindings: Env }>()
 // Root Health & Verification Endpoint
 app.get('/', (c) => c.text('REPO-BOT EDGE CONTROL PLANE IS LIVE'))
 
+app.route('/api/v1/assets', uploadRoutes);
+
+
 // Structured Diagnostics Endpoint (Satisfies packages/100.agent switchboard probe)
 app.get('/health', (c) =>
     c.json(
@@ -99,4 +106,12 @@ app.all('/*', async (c) => {
 })
 
 export const AgentSessionDO = dynamicWorker.AgentSessionDO
-export default app
+export { AudioLeaseDO }
+
+
+export default {
+    fetch: app.fetch,
+    async scheduled(event: any, env: any, ctx: any) {
+        ctx.waitUntil(runScheduledStorageSweeper(env));
+    }
+}
